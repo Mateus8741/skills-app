@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './App.{js,ts,tsx}',
-    './components/**/*.{js,ts,tsx}',
-    './screens/**/*.{js,ts,tsx}',
-    './navigation/**/*.{js,ts,tsx}',
-  ],
+  content: ['./src/**/*.{js,ts,tsx}'],
 
   presets: [require('nativewind/preset')],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        heading: 'Roboto_400Regular',
+        subtitle: 'Roboto_500Medium',
+        bold: 'Roboto_700Bold',
+      },
+    },
   },
   plugins: [],
 };
