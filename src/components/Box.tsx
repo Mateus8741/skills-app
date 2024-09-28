@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 
@@ -6,9 +7,10 @@ import { useAppSafeArea } from '~/hooks';
 interface Props {
   children: React.ReactNode;
   scrollable?: boolean;
+  isStatusBarHidden?: boolean;
 }
 
-export function Box({ children, scrollable = false }: Props) {
+export function Box({ children, scrollable = false, isStatusBarHidden = false }: Props) {
   const { top, bottom } = useAppSafeArea();
 
   const Container = scrollable ? ScrollView : View;
@@ -17,6 +19,7 @@ export function Box({ children, scrollable = false }: Props) {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <StatusBar style="dark" hidden={isStatusBarHidden} />
       <Container
         style={{
           flex: 1,
