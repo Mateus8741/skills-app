@@ -34,11 +34,11 @@ export function TextInput({
 
   return (
     <>
-      {label && <Text className="mb-2 font-heading text-lg text-black">{label}</Text>}
-
-      <View className={`rounded-xl border border-gray-300 ${moreClassName}`}>
+      <View>
+        {label && <Text className="mb-2 font-heading text-lg text-black">{label}</Text>}
         <Pressable onPress={focusInput}>
-          <View className="w-full flex-row items-center py-2">
+          <View
+            className={`w-full flex-row items-center rounded-xl border border-gray-300 py-2 ${moreClassName}`}>
             {leftComponent && <View className="mx-2 justify-center">{leftComponent}</View>}
             <RNTextInput
               className={`px-5 ${$HEIGHT} text-white`}
