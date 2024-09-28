@@ -1,11 +1,25 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { Box, CustomButton, Header, InfoText, TextInput } from '~/components';
+import { Box, CustomButton, FormTextInput, Header, InfoText } from '~/components';
 import { AuthScreenProps } from '~/routes';
+import { Step1Scheema, StepsScheema } from '~/schemas';
 
 export function Step1({ navigation }: AuthScreenProps<'Step1'>) {
-  function handleNavigateToStep2() {
-    navigation.navigate('Step2');
+  const { control, handleSubmit, reset } = useForm<StepsScheema>({
+    resolver: zodResolver(Step1Scheema),
+
+    defaultValues: {
+      email: '',
+    },
+
+    mode: 'onChange',
+  });
+
+  function handleNavigateToStep2(email: StepsScheema) {
+    navigation.navigate('Step2', email);
+    reset();
   }
 
   return (
@@ -16,9 +30,18 @@ export function Step1({ navigation }: AuthScreenProps<'Step1'>) {
         <InfoText text="Cadastre-se no Skill's" />
 
         <View className="gap-12">
-          <TextInput label="E-mail" placeholder="Digite seu e-mail" />
+          <FormTextInput
+            control={control}
+            name="email"
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+          />
 
-          <CustomButton title="Continue" variant="secondary" onPress={handleNavigateToStep2} />
+          <CustomButton
+            title="Continue"
+            variant="secondary"
+            onPress={handleSubmit(handleNavigateToStep2)}
+          />
 
           {/* <View className="flex-row items-center justify-center gap-3">
             <View className="h-px flex-1 bg-gray-300" />
