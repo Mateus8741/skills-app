@@ -62,7 +62,7 @@ import { Loading } from './Loading';
 const buttonStyles = tv({
   slots: {
     base: 'h-16 w-full items-center justify-center rounded-xl',
-    label: 'text-center text-lg font-semibold',
+    label: 'text-center text-xl font-bold',
     loading: 'text-white',
   },
   variants: {
@@ -106,7 +106,11 @@ export function CustomButton({
   const { base, label, loading } = buttonStyles({ variant });
 
   return (
-    <TouchableOpacity className={base()} disabled={variant === 'disabled' || isLoading} {...rest}>
+    <TouchableOpacity
+      className={base()}
+      disabled={variant === 'disabled' || isLoading}
+      {...rest}
+      activeOpacity={0.7}>
       {isLoading ? (
         <Loading isButton color={loading()} />
       ) : (
