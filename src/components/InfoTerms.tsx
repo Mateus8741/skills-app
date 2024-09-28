@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 export function InfoTerms() {
   return (
     <View>
-      <Text className="text-center text-sm text-gray-500">
+      <Text className="text-center text-sm text-gray-700">
         Ao continuar, você concorda com os{' '}
         <Text className="font-bold text-black">Termos de Serviço</Text> e a{' '}
         <Text className="font-bold text-black">Política de Privacidade</Text> do{' '}

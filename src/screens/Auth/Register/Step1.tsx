@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-import { Box, CustomButton, Header, InfoTerms, InfoText, TextInput } from '~/components';
+import { Box, CustomButton, Header, InfoText, TextInput } from '~/components';
 import { AuthScreenProps } from '~/routes';
 
 export function Step1({ navigation }: AuthScreenProps<'Step1'>) {
@@ -29,8 +29,6 @@ export function Step1({ navigation }: AuthScreenProps<'Step1'>) {
           <CustomButton title="Continue com WhatsApp" variant="disabled" />
           <CustomButton title="Continue com Celular" variant="disabled" /> */}
         </View>
-
-        <InfoTerms />
       </View>
     </Box>
   );
