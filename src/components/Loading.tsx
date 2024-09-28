@@ -8,7 +8,12 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-export function Loading() {
+interface LoadingProps {
+  isButton?: boolean;
+  color?: string;
+}
+
+export function Loading({ isButton, color }: LoadingProps) {
   const dots = [useSharedValue(0), useSharedValue(0), useSharedValue(0)];
 
   useEffect(() => {
@@ -36,7 +41,15 @@ export function Loading() {
     });
   }
 
-  return (
+  return isButton ? (
+    <View className="flex-1 flex-row items-center justify-center space-x-2">
+      {dots.map((dot, index) => (
+        <Animated.View key={index} style={AnimatedStyle(dot)}>
+          <Text className={`text-3xl ${color}`}>•</Text>
+        </Animated.View>
+      ))}
+    </View>
+  ) : (
     <View className="flex-1 flex-row items-center justify-center space-x-2">
       {dots.map((dot, index) => (
         <Animated.View key={index} style={AnimatedStyle(dot)}>
