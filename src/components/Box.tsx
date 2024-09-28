@@ -28,6 +28,7 @@ export function Box({ children, scrollable = false, isStatusBarHidden = false }:
           paddingTop: top,
           paddingBottom: bottom,
         }}
+        contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
         {children}
