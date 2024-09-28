@@ -1,5 +1,6 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+
 import { useAppSafeArea } from '~/hooks';
 
 interface Props {
