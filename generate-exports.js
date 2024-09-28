@@ -14,22 +14,33 @@ if (!targetDir) {
 const componentsDir = path.join(process.cwd(), 'src', targetDir);
 const indexPath = path.join(componentsDir, 'index.ts');
 
+// Função para ler arquivos recursivamente
+const getExports = (dir) => {
+    const files = fs.readdirSync(dir);
+    let exports = '';
+
+    files.forEach((file) => {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+
+        if (stat.isDirectory()) {
+            // Se for uma pasta, chama recursivamente
+            exports += getExports(filePath);
+        } else if (file !== 'index.ts' && (file.endsWith('.ts') || file.endsWith('.tsx'))) {
+            // Se for um arquivo .ts ou .tsx, adiciona o export
+            const relativePath = path.relative(componentsDir, filePath).replace(/\.(ts|tsx)$/, '');
+            exports += `export * from './${relativePath}';\n`;
+        }
+    });
+
+    return exports;
+};
+
 // Adicione uma mensagem de log para verificar o caminho da pasta
 console.log(`Verificando arquivos em: ${componentsDir}`);
 
-fs.readdir(componentsDir, (err, files) => {
-    if (err) {
-        console.error(`Erro ao ler a pasta de componentes: ${targetDir}`, err);
-        return;
-    }
-
-    // Exiba os arquivos encontrados para debug
-    console.log('Arquivos encontrados:', files);
-
-    const exports = files
-        .filter((file) => file !== 'index.ts' && (file.endsWith('.ts') || file.endsWith('.tsx'))) // Inclui arquivos .ts e .tsx
-        .map((file) => `export * from './${file.replace(/\.(ts|tsx)$/, '')}';`) // Remove a extensão ao gerar o export
-        .join('\n');
+try {
+    const exports = getExports(componentsDir);
 
     // Adicione um log para exibir o conteúdo gerado
     console.log('Conteúdo gerado para o index.ts:', exports);
@@ -38,11 +49,8 @@ fs.readdir(componentsDir, (err, files) => {
         console.log('Nenhum arquivo .ts ou .tsx encontrado para exportar.');
     }
 
-    fs.writeFile(indexPath, exports, (err) => {
-        if (err) {
-            console.error('Erro ao escrever o arquivo index.ts:', err);
-        } else {
-            console.log(`Arquivo index.ts gerado com sucesso na pasta src/${targetDir}!`);
-        }
-    });
-});
+    fs.writeFileSync(indexPath, exports.trim());
+    console.log(`Arquivo index.ts gerado com sucesso na pasta src/${targetDir}!`);
+} catch (err) {
+    console.error(`Erro ao processar a pasta de componentes: ${targetDir}`, err);
+}
