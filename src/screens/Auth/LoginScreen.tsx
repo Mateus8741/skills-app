@@ -3,8 +3,13 @@ import { ImageBackground, Text, View } from 'react-native';
 
 import BGImg from '~/assets/BGImage.png';
 import { CustomButton } from '~/components';
+import { AuthScreenProps } from '~/routes';
 
-export function LoginScreen() {
+export function LoginScreen({ navigation }: AuthScreenProps<'LoginScreen'>) {
+  function handleNavigateToStep1() {
+    navigation.navigate('Step1');
+  }
+
   return (
     <ImageBackground source={BGImg} className="flex-1 items-center justify-center bg-green-600">
       <StatusBar hidden />
@@ -15,7 +20,7 @@ export function LoginScreen() {
       </Text>
 
       <View className="mt-7 w-full gap-y-4 p-5">
-        <CustomButton title="Cadastre-se no Skill's" />
+        <CustomButton title="Cadastre-se no Skill's" onPress={handleNavigateToStep1} />
 
         <CustomButton title="Login" variant="ghost" />
       </View>
