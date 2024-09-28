@@ -2,11 +2,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
 import { LoginScreen } from '../screens/Auth/LoginScreen';
-import { Step1 } from '../screens/Auth/Register/Step1';
+
+import { Step1, Step2 } from '~/screens';
 
 export type AuthStackParamList = {
   LoginScreen: undefined;
   Step1: undefined;
+  Step2: undefined;
 };
 
 export function AuthStack() {
@@ -21,6 +23,7 @@ export function AuthStack() {
       }}>
       <Screen name="LoginScreen" component={LoginScreen} />
       <Screen name="Step1" component={Step1} />
+      <Screen name="Step2" component={Step2} />
     </Navigator>
   );
 }

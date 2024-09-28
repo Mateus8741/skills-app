@@ -1,8 +1,13 @@
 import { View } from 'react-native';
 
 import { Box, CustomButton, Header, InfoTerms, InfoText, TextInput } from '~/components';
+import { AuthScreenProps } from '~/routes';
 
-export function Step1() {
+export function Step1({ navigation }: AuthScreenProps<'Step1'>) {
+  function handleNavigateToStep2() {
+    navigation.navigate('Step2');
+  }
+
   return (
     <Box scrollable>
       <Header />
@@ -13,7 +18,7 @@ export function Step1() {
         <View className="gap-12">
           <TextInput label="E-mail" placeholder="Digite seu e-mail" />
 
-          <CustomButton title="Continue" variant="secondary" />
+          <CustomButton title="Continue" variant="secondary" onPress={handleNavigateToStep2} />
 
           {/* <View className="flex-row items-center justify-center gap-3">
             <View className="h-px flex-1 bg-gray-300" />
