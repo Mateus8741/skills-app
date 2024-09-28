@@ -41,7 +41,7 @@ export function TextInput({
             className={`w-full flex-row items-center rounded-xl border border-gray-300 py-2 ${moreClassName}`}>
             {leftComponent && <View className="mx-2 justify-center">{leftComponent}</View>}
             <RNTextInput
-              className={`px-5 ${$HEIGHT} text-white`}
+              className={`px-5 ${$HEIGHT} text-black`}
               placeholderTextColor="gray"
               autoCapitalize="none"
               cursorColor="white"
@@ -52,13 +52,13 @@ export function TextInput({
             {rightComponent && <View className="mx-4 justify-center">{rightComponent}</View>}
           </View>
         </Pressable>
-      </View>
 
-      {errorMessage && (
-        <Text className="font-semiBold text-md mt-1 text-left font-bold text-red-500">
-          {errorMessage}
-        </Text>
-      )}
+        {errorMessage && (
+          <Text className="font-semiBold text-md mt-1 text-left font-bold text-red-500">
+            {errorMessage}
+          </Text>
+        )}
+      </View>
     </>
   );
 }
