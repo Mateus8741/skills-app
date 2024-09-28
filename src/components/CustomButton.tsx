@@ -28,6 +28,10 @@ const buttonStyles = tv({
         base: 'bg-transparent border border-white',
         label: 'text-white',
       },
+      ghostGreen: {
+        base: 'bg-transparent border border-green-600',
+        label: 'text-green-600',
+      },
     },
   },
   defaultVariants: {
@@ -37,7 +41,7 @@ const buttonStyles = tv({
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
-  variant?: 'primary' | 'secondary' | 'disabled' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'disabled' | 'ghost' | 'ghostGreen';
   isLoading?: boolean;
 }
 
