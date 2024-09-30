@@ -6,6 +6,10 @@ import { CustomButton } from '~/components';
 import { AuthScreenProps } from '~/routes';
 
 export function OnboardScreen({ navigation }: AuthScreenProps<'OnboardScreen'>) {
+  function handleNavigateToLogin() {
+    navigation.navigate('LoginScreen');
+  }
+
   function handleNavigateToStep1() {
     navigation.navigate('Step1');
   }
@@ -22,7 +26,7 @@ export function OnboardScreen({ navigation }: AuthScreenProps<'OnboardScreen'>) 
       <View className="mt-7 w-full gap-y-4 p-5">
         <CustomButton title="Cadastre-se no Skill's" onPress={handleNavigateToStep1} />
 
-        <CustomButton title="Login" variant="ghost" />
+        <CustomButton title="Login" variant="ghost" onPress={handleNavigateToLogin} />
       </View>
     </ImageBackground>
   );
