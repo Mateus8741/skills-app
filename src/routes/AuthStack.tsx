@@ -8,7 +8,7 @@ import { Step1, Step2 } from '~/screens';
 export type AuthStackParamList = {
   LoginScreen: undefined;
   Step1: undefined;
-  Step2: undefined;
+  Step2: { email: string };
 };
 
 export function AuthStack() {
