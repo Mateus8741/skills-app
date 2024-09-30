@@ -1,3 +1,4 @@
+import { requestForegroundPermissionsAsync } from 'expo-location';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { Image, ImageBackground, Text, View } from 'react-native';
@@ -7,13 +8,12 @@ import BGImg from '~/assets/BGImage.png';
 import { CustomButton } from '~/components';
 import { AuthScreenProps } from '~/routes';
 
-export function AllowLocation({ navigation, route }: AuthScreenProps<'AllowLocation'>) {
-  const locationPermitted = false;
-  const { data } = route.params;
+export function AllowLocation({ navigation }: AuthScreenProps<'AllowLocation'>) {
+  async function watchIsLocationPermitted() {
+    const { granted } = await requestForegroundPermissionsAsync();
 
-  function watchIsLocationPermitted() {
-    if (locationPermitted) {
-      navigation.push('MapScreen', { data });
+    if (granted) {
+      navigation.push('MapScreen');
     }
   }
 
@@ -37,7 +37,11 @@ export function AllowLocation({ navigation, route }: AuthScreenProps<'AllowLocat
       </Text>
 
       <View className="w-full p-5">
-        <CustomButton title="Permitir localização" variant="ghostGreen" />
+        <CustomButton
+          title="Permitir localização"
+          variant="ghostGreen"
+          onPress={watchIsLocationPermitted}
+        />
       </View>
     </ImageBackground>
   );

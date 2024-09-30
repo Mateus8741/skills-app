@@ -11,7 +11,7 @@ export type AuthStackParamList = {
   Step1: undefined;
   Step2: { email: string };
   AllowLocation: { data: StepsScheema };
-  MapScreen: { data: StepsScheema };
+  MapScreen: undefined;
 };
 
 export function AuthStack() {
@@ -28,7 +28,7 @@ export function AuthStack() {
       <Screen name="Step1" component={Step1} />
       <Screen name="Step2" component={Step2} />
       <Screen name="AllowLocation" component={AllowLocation} />
-      <Screen name="MapScreen" component={MapScreen} />
+      <Screen name="MapScreen" component={MapScreen} options={{ gestureEnabled: false }} />
     </Navigator>
   );
 }
