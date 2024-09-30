@@ -1,6 +1,7 @@
 export * from './Box';
 export * from './CheckForm';
 export * from './CustomButton';
+export * from './CustomIcons';
 export * from './Form/FormPasswordInput';
 export * from './Form/FormTextInput';
 export * from './Header';

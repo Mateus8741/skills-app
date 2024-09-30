@@ -1,3 +1,4 @@
+export * from './App/HomeScreen';
 export * from './Auth/LoginScreen';
 export * from './Auth/Register/AllowLocation';
 export * from './Auth/Register/ConfirmLocation';
