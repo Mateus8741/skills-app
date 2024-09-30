@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import MapView from 'react-native-maps';
@@ -6,9 +7,12 @@ import MapView from 'react-native-maps';
 import { Box, CustomButton, FormTextInput, Header } from '~/components';
 import { AuthScreenProps } from '~/routes';
 import { LocationScheema, locationScheema } from '~/schemas';
+import { getAddressLocation } from '~/utils';
 
 export function ConfirmLocation({ navigation, route }: AuthScreenProps<'ConfirmLocation'>) {
   const { location } = route.params;
+
+  const [address, setAddress] = useState<string>('');
 
   const {
     control,
@@ -26,15 +30,28 @@ export function ConfirmLocation({ navigation, route }: AuthScreenProps<'ConfirmL
       complement: '',
     },
 
+    values: {
+      street: address,
+      neighborhood: '',
+      houseNumber: 0,
+      reference: '',
+      complement: '',
+    },
+
     mode: 'onChange',
   });
 
+  getAddressLocation(location).then((data) => {
+    setAddress(data?.street ?? '');
+  });
+
   function onSubmit(data: LocationScheema) {
+    reset();
     console.log(data);
   }
 
   return (
-    <Box>
+    <Box scrollable>
       <Header title="Confirme seu endereço" />
 
       <MapView
