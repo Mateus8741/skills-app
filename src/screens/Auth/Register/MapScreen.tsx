@@ -1,53 +1,16 @@
-import {
-    getCurrentPositionAsync,
-    LocationAccuracy,
-    LocationObjectCoords,
-    watchPositionAsync,
-} from 'expo-location';
-import { useEffect, useRef, useState } from 'react';
 import { Text, View } from 'react-native';
 import MapView, { MarkerAnimated } from 'react-native-maps';
 
 import { Box, CustomButton } from '~/components';
+import { useLocationTracking } from '~/hooks';
+import { AuthScreenProps } from '~/routes';
 
-export function MapScreen() {
-  const [location, setLocation] = useState<LocationObjectCoords>();
+export function MapScreen({ navigation }: AuthScreenProps<'MapScreen'>) {
+  const { location, mapRef } = useLocationTracking();
 
-  const mapRef = useRef<MapView>(null);
-
-  async function getPosition() {
-    const { coords } = await getCurrentPositionAsync();
-    setLocation(coords);
+  function handleConfirmLocation() {
+    navigation.navigate('ConfirmLocation', { location });
   }
-
-  useEffect(() => {
-    getPosition();
-  }, []);
-
-  useEffect(() => {
-    async function subscribeToLocationUpdates() {
-      const subscription = await watchPositionAsync(
-        { accuracy: LocationAccuracy.Highest, timeInterval: 1000, distanceInterval: 1 },
-        (location) => {
-          setLocation(location.coords);
-          mapRef.current?.animateCamera({
-            center: {
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
-            },
-            heading: location.coords.heading || 0,
-          });
-        }
-      );
-      return subscription;
-    }
-
-    const subscriptionPromise = subscribeToLocationUpdates();
-
-    return () => {
-      subscriptionPromise.then((subscription) => subscription.remove());
-    };
-  }, []);
 
   return (
     <Box>
@@ -77,7 +40,11 @@ export function MapScreen() {
       </MapView>
 
       <View className="mt-5">
-        <CustomButton title="Confirmar localização" onPress={() => {}} variant="ghostGreen" />
+        <CustomButton
+          title="Confirmar localização"
+          onPress={handleConfirmLocation}
+          variant="ghostGreen"
+        />
       </View>
     </Box>
   );
