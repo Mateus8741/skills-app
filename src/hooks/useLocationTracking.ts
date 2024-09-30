@@ -1,19 +1,20 @@
 /* eslint-disable prettier/prettier */
 import {
-    getCurrentPositionAsync,
-    LocationAccuracy,
-    LocationObjectCoords,
-    watchPositionAsync,
+  getCurrentPositionAsync,
+  LocationAccuracy,
+  LocationObjectCoords,
+  watchPositionAsync,
 } from 'expo-location';
 import { useEffect, useRef, useState } from 'react';
 import MapView from 'react-native-maps';
 
 export interface MapScreenProps {
-    location: Pick<LocationObjectCoords, 'latitude' | 'longitude'>;
+    latitude: LocationObjectCoords['latitude'];
+    longitude: LocationObjectCoords['longitude'];
   }
 
 export function useLocationTracking() {
-  const [location, setLocation] = useState<MapScreenProps['location']>({
+  const [location, setLocation] = useState<MapScreenProps>({
     latitude: 0,
     longitude: 0,
   });
