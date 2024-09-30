@@ -1,4 +1,5 @@
 export * from './Box';
+export * from './CheckForm';
 export * from './CustomButton';
 export * from './Form/FormPasswordInput';
 export * from './Form/FormTextInput';
