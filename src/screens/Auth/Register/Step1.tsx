@@ -35,6 +35,7 @@ export function Step1({ navigation }: AuthScreenProps<'Step1'>) {
             name="email"
             label="E-mail"
             placeholder="Digite seu e-mail"
+            keyboardType="email-address"
           />
 
           <CustomButton
