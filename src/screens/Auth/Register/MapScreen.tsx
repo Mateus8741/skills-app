@@ -6,49 +6,18 @@ import {
 } from 'expo-location';
 import { useEffect, useRef, useState } from 'react';
 import { Text, View } from 'react-native';
-import MapView, { Marker, Region } from 'react-native-maps';
+import MapView, { MarkerAnimated } from 'react-native-maps';
 
 import { Box, CustomButton } from '~/components';
 
 export function MapScreen() {
   const [location, setLocation] = useState<LocationObjectCoords>();
-  const [markerLocation, setMarkerLocation] = useState<LocationObjectCoords>();
 
   const mapRef = useRef<MapView>(null);
 
   async function getPosition() {
     const { coords } = await getCurrentPositionAsync();
     setLocation(coords);
-    setMarkerLocation(coords);
-  }
-
-  function handleMapPress(event: any) {
-    const { coordinate } = event.nativeEvent;
-    setMarkerLocation(coordinate);
-  }
-
-  function handleRegionChange(region: Region) {
-    setMarkerLocation({
-      latitude: region.latitude,
-      longitude: region.longitude,
-      altitude: 0,
-      accuracy: 0,
-      altitudeAccuracy: 0,
-      heading: 0,
-      speed: 0,
-    });
-  }
-
-  function handleRegionChangeComplete(region: Region) {
-    setMarkerLocation({
-      latitude: region.latitude,
-      longitude: region.longitude,
-      altitude: 0,
-      accuracy: 0,
-      altitudeAccuracy: 0,
-      heading: 0,
-      speed: 0,
-    });
   }
 
   useEffect(() => {
@@ -58,7 +27,7 @@ export function MapScreen() {
   useEffect(() => {
     async function subscribeToLocationUpdates() {
       const subscription = await watchPositionAsync(
-        { accuracy: LocationAccuracy.Highest, timeInterval: 1000, distanceInterval: 5 },
+        { accuracy: LocationAccuracy.Highest, timeInterval: 1000, distanceInterval: 1 },
         (location) => {
           setLocation(location.coords);
           mapRef.current?.animateCamera({
@@ -94,15 +63,12 @@ export function MapScreen() {
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
         }}
-        onPress={handleMapPress} // Captura cliques no mapa
-        onRegionChange={handleRegionChange}
-        onRegionChangeComplete={handleRegionChangeComplete} // Captura quando o mapa é arrastado
         style={{ flex: 1, marginHorizontal: -20 }}>
-        {markerLocation && (
-          <Marker
+        {location && (
+          <MarkerAnimated
             coordinate={{
-              latitude: markerLocation.latitude,
-              longitude: markerLocation.longitude,
+              latitude: location.latitude,
+              longitude: location.longitude,
             }}
             title="Sua localização"
             description="Você está aqui"
