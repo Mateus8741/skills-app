@@ -15,8 +15,8 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
 
   return (
     <View
-      className="absolute bottom-0 flex-row rounded-t-3xl bg-white p-3"
-      style={[{ paddingBottom: bottom }, useShadowProps()]}>
+      className="absolute bottom-8 mx-5 flex-row rounded-3xl bg-green-600 p-3"
+      style={[useShadowProps()]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
 
@@ -53,10 +53,10 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
         return (
           <TouchableOpacity
             key={route.key}
-            activeOpacity={1}
+            activeOpacity={0.7}
             className={
               isFocused
-                ? 'flex-row items-center justify-center rounded-xl bg-gray-500/35 py-3'
+                ? 'flex-row items-center justify-center rounded-xl bg-green-900 py-3'
                 : 'items-center justify-center py-3'
             }
             accessibilityRole="button"
