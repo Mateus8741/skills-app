@@ -43,20 +43,24 @@ interface ButtonProps extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'secondary' | 'disabled' | 'ghost' | 'ghostGreen';
   isLoading?: boolean;
+  isDisabled?: boolean;
 }
 
 export function CustomButton({
   title,
   variant = 'primary',
   isLoading = false,
+  isDisabled = false,
   ...rest
 }: ButtonProps) {
   const { base, label, loading } = buttonStyles({ variant });
 
+  const disableded = isDisabled || isLoading;
+
   return (
     <TouchableOpacity
-      className={base()}
-      disabled={variant === 'disabled' || isLoading}
+      className={disableded ? base({ variant: 'disabled' }) : base()}
+      disabled={disableded}
       {...rest}
       activeOpacity={0.7}>
       {isLoading ? (
