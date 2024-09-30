@@ -3,7 +3,7 @@ import { ArrowLeft } from 'lucide-react-native';
 import { Pressable, Text, View } from 'react-native';
 
 interface HeaderProps {
-  title: string;
+  title?: string;
 }
 
 export function Header({ title }: HeaderProps) {
@@ -18,7 +18,7 @@ export function Header({ title }: HeaderProps) {
         <ArrowLeft size={40} color="black" />
       </Pressable>
 
-      <Text className="text-center font-subtitle text-black">{title}</Text>
+      {title && <Text className="text-center font-subtitle text-black">{title}</Text>}
 
       <View className="w-10" />
     </View>
