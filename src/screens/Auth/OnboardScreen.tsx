@@ -5,7 +5,7 @@ import BGImg from '~/assets/BGImage.png';
 import { CustomButton } from '~/components';
 import { AuthScreenProps } from '~/routes';
 
-export function LoginScreen({ navigation }: AuthScreenProps<'LoginScreen'>) {
+export function OnboardScreen({ navigation }: AuthScreenProps<'OnboardScreen'>) {
   function handleNavigateToStep1() {
     navigation.navigate('Step1');
   }

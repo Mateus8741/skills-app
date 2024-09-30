@@ -1,6 +1,8 @@
-import { LocationObjectCoords, reverseGeocodeAsync } from 'expo-location';
+import { reverseGeocodeAsync } from 'expo-location';
 
-export async function getAddressLocation({ latitude, longitude }: LocationObjectCoords) {
+import { MapScreenProps } from '~/hooks';
+
+export async function getAddressLocation({ latitude, longitude }: MapScreenProps) {
   try {
     const addressResponse = await reverseGeocodeAsync({ latitude, longitude });
 
