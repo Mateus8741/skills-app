@@ -1,3 +1,4 @@
+export * from './AppStack';
 export * from './AuthStack';
 export * from './BottomTabsNavigation/AppTabBar';
 export * from './BottomTabsNavigation/AppTabNavigator';
