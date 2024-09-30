@@ -5,10 +5,20 @@ import { OnboardScreen } from '../screens/Auth/OnboardScreen';
 
 import { MapScreenProps } from '~/hooks/useLocationTracking';
 import { StepsScheema } from '~/schemas';
-import { AllowLocation, ConfirmLocation, MapScreen, Step1, Step2 } from '~/screens';
+import {
+  AllowLocation,
+  ConfirmLocation,
+  ForgotPasswordScreen,
+  LoginScreen,
+  MapScreen,
+  Step1,
+  Step2,
+} from '~/screens';
 
 export type AuthStackParamList = {
   OnboardScreen: undefined;
+  LoginScreen: undefined;
+  ForgotPasswordScreen: undefined;
   Step1: undefined;
   Step2: { email: string };
   AllowLocation: { data: StepsScheema };
@@ -27,6 +37,8 @@ export function AuthStack() {
         fullScreenGestureEnabled: true,
       }}>
       <Screen name="OnboardScreen" component={OnboardScreen} />
+      <Screen name="LoginScreen" component={LoginScreen} />
+      <Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
       <Screen name="Step1" component={Step1} />
       <Screen name="Step2" component={Step2} />
       <Screen name="AllowLocation" component={AllowLocation} />
