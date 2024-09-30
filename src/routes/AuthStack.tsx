@@ -3,8 +3,9 @@ import React from 'react';
 
 import { LoginScreen } from '../screens/Auth/LoginScreen';
 
+import { MapScreenProps } from '~/hooks/useLocationTracking';
 import { StepsScheema } from '~/schemas';
-import { AllowLocation, MapScreen, Step1, Step2 } from '~/screens';
+import { AllowLocation, ConfirmLocation, MapScreen, Step1, Step2 } from '~/screens';
 
 export type AuthStackParamList = {
   LoginScreen: undefined;
@@ -12,6 +13,7 @@ export type AuthStackParamList = {
   Step2: { email: string };
   AllowLocation: { data: StepsScheema };
   MapScreen: undefined;
+  ConfirmLocation: { location: MapScreenProps['location'] };
 };
 
 export function AuthStack() {
@@ -29,6 +31,7 @@ export function AuthStack() {
       <Screen name="Step2" component={Step2} />
       <Screen name="AllowLocation" component={AllowLocation} />
       <Screen name="MapScreen" component={MapScreen} options={{ gestureEnabled: false }} />
+      <Screen name="ConfirmLocation" component={ConfirmLocation} />
     </Navigator>
   );
 }
