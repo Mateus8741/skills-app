@@ -14,7 +14,6 @@ export function CheckForm({
   hasNumber,
   hasSpecialChar,
 }: CheckFormProps) {
-  // Associar os critérios de validação diretamente com as condições
   const checks = [
     {
       title: 'Uma letra de a-z',
@@ -51,11 +50,4 @@ export function CheckForm({
       ))}
     </View>
   );
-}
-
-{
-  /* <View key={check.title} className="flex-row items-center gap-2">
-          <LucideCheckCircle2 size={24} color="green" fill="green" stroke="white" />
-          <Text className="font-bold text-green-600">{check.title}</Text>
-        </View> */
 }
