@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { login } from '~/api/apiConfig';
+import { login, setAuthToken } from '~/api/apiConfig';
 import { LoginScheema } from '~/schemas';
 
 export function useLogin(onSuccess?: () => void) {
@@ -10,8 +10,13 @@ export function useLogin(onSuccess?: () => void) {
     mutationFn: (data: LoginScheema) => login(data),
     onSuccess,
     onSettled(data, error, variables, context) {
+      const token = data?.data.token;
       if (error) {
         console.error(error);
+      }
+
+      if (token) {
+        setAuthToken(token);
       }
 
       //   setUser({
