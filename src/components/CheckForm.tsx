@@ -28,7 +28,7 @@ export function CheckForm({
       isValid: hasSpecialChar,
     },
     {
-      title: 'Mínimo de 8 caracteres',
+      title: 'Mínimo de 6 caracteres',
       isValid: hasMinLength,
     },
   ];
