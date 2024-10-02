@@ -3,14 +3,14 @@ import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
 import {
-    Box,
-    CheckForm,
-    CustomButton,
-    FormPasswordInput,
-    FormTextInput,
-    Header,
-    InfoTerms,
-    InfoText,
+  Box,
+  CheckForm,
+  CustomButton,
+  FormPasswordInput,
+  FormTextInput,
+  Header,
+  InfoTerms,
+  InfoText,
 } from '~/components';
 import { AuthScreenProps } from '~/routes';
 import { stepsScheema, StepsScheema } from '~/schemas';
@@ -23,10 +23,10 @@ export function Step2({ navigation, route }: AuthScreenProps<'Step2'>) {
     resolver: zodResolver(stepsScheema),
 
     defaultValues: {
-      firstName: 'Matt',
-      lastName: 'Tavares',
+      firstName: '',
+      lastName: '',
       email: email || '',
-      password: '1234m@',
+      password: '',
     },
 
     mode: 'onChange',
