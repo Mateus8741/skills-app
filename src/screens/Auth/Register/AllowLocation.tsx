@@ -8,12 +8,14 @@ import BGImg from '~/assets/BGImage.png';
 import { CustomButton } from '~/components';
 import { AuthScreenProps } from '~/routes';
 
-export function AllowLocation({ navigation }: AuthScreenProps<'AllowLocation'>) {
+export function AllowLocation({ navigation, route }: AuthScreenProps<'AllowLocation'>) {
+  const { userData } = route.params;
+
   async function watchIsLocationPermitted() {
     const { granted } = await requestForegroundPermissionsAsync();
 
     if (granted) {
-      navigation.push('MapScreen');
+      navigation.push('MapScreen', { userData });
     }
   }
 

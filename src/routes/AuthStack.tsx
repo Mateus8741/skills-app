@@ -21,9 +21,9 @@ export type AuthStackParamList = {
   ForgotPasswordScreen: undefined;
   Step1: undefined;
   Step2: { email: string };
-  AllowLocation: { data: StepsScheema };
-  MapScreen: undefined;
-  ConfirmLocation: { location: MapScreenProps };
+  AllowLocation: { userData: StepsScheema };
+  MapScreen: { userData: StepsScheema };
+  ConfirmLocation: { location: MapScreenProps; userData: StepsScheema };
 };
 
 export function AuthStack() {

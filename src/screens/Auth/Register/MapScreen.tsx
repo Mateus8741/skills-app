@@ -5,11 +5,13 @@ import { Box, CustomButton } from '~/components';
 import { useLocationTracking } from '~/hooks';
 import { AuthScreenProps } from '~/routes';
 
-export function MapScreen({ navigation }: AuthScreenProps<'MapScreen'>) {
+export function MapScreen({ navigation, route }: AuthScreenProps<'MapScreen'>) {
+  const { userData } = route.params;
+
   const { location, mapRef } = useLocationTracking();
 
   function handleConfirmLocation() {
-    navigation.navigate('ConfirmLocation', { location });
+    navigation.navigate('ConfirmLocation', { location, userData });
   }
 
   return (

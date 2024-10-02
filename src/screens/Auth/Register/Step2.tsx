@@ -9,7 +9,6 @@ import {
   FormPasswordInput,
   FormTextInput,
   Header,
-  InfoTerms,
   InfoText,
 } from '~/components';
 import { AuthScreenProps } from '~/routes';
@@ -26,6 +25,7 @@ export function Step2({ navigation, route }: AuthScreenProps<'Step2'>) {
       firstName: '',
       lastName: '',
       email: email || '',
+      phoneNumber: 0,
       password: '',
     },
 
@@ -34,8 +34,8 @@ export function Step2({ navigation, route }: AuthScreenProps<'Step2'>) {
 
   const password = watch('password');
 
-  function handleSetLocation(data: StepsScheema) {
-    navigation.navigate('AllowLocation', { data });
+  function handleSetLocation(userData: StepsScheema) {
+    navigation.navigate('AllowLocation', { userData });
     reset();
   }
 
@@ -43,7 +43,7 @@ export function Step2({ navigation, route }: AuthScreenProps<'Step2'>) {
     <Box scrollable>
       <Header />
 
-      <View className="mt-10 flex-1">
+      <View className="my-6 flex-1">
         <InfoText text="Complete suas informações" />
 
         <View className="mt-6 flex-1 gap-4">
@@ -68,6 +68,13 @@ export function Step2({ navigation, route }: AuthScreenProps<'Step2'>) {
             placeholder="Digite seu e-mail"
           />
 
+          <FormTextInput
+            control={control}
+            name="phoneNumber"
+            label="Celular"
+            placeholder="Digite seu número"
+          />
+
           <FormPasswordInput
             control={control}
             name="password"
@@ -78,19 +85,9 @@ export function Step2({ navigation, route }: AuthScreenProps<'Step2'>) {
 
           <CheckForm {...passwordValidation(password)} />
         </View>
-
-        <View className="flex-col">
-          <View className="mb-4 rounded-md bg-gray-300 p-4">
-            <InfoTerms />
-          </View>
-
-          <CustomButton
-            title="Próximo"
-            variant="secondary"
-            onPress={handleSubmit(handleSetLocation)}
-          />
-        </View>
       </View>
+
+      <CustomButton title="Próximo" variant="secondary" onPress={handleSubmit(handleSetLocation)} />
     </Box>
   );
 }

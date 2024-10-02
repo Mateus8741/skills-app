@@ -4,13 +4,23 @@ import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import MapView from 'react-native-maps';
 
+import { useLogin, useRegister } from '~/api';
 import { Box, CustomButton, FormTextInput, Header } from '~/components';
 import { AuthScreenProps } from '~/routes';
 import { LocationScheema, locationScheema } from '~/schemas';
 import { getAddressLocation } from '~/utils';
 
 export function ConfirmLocation({ navigation, route }: AuthScreenProps<'ConfirmLocation'>) {
-  const { location } = route.params;
+  const { location, userData } = route.params;
+
+  const { login } = useLogin();
+
+  const { register, isPending } = useRegister(() =>
+    login({
+      email: userData.email,
+      password: userData.password,
+    })
+  );
 
   const [address, setAddress] = useState<string>('');
 
@@ -18,7 +28,7 @@ export function ConfirmLocation({ navigation, route }: AuthScreenProps<'ConfirmL
     control,
     handleSubmit,
     reset,
-    formState: { isDirty, isLoading, isValid },
+    formState: { isDirty, isValid },
   } = useForm<LocationScheema>({
     resolver: zodResolver(locationScheema),
 
@@ -47,7 +57,12 @@ export function ConfirmLocation({ navigation, route }: AuthScreenProps<'ConfirmL
 
   function onSubmit(data: LocationScheema) {
     reset();
-    console.log(data);
+
+    register({
+      ...userData,
+      isAuthenticated: false,
+      location: data,
+    });
   }
 
   return (
@@ -96,7 +111,7 @@ export function ConfirmLocation({ navigation, route }: AuthScreenProps<'ConfirmL
       </View>
 
       <CustomButton
-        isLoading={isLoading}
+        isLoading={isPending}
         isDisabled={!isDirty || !isValid}
         variant="secondary"
         title="Confirmar"
