@@ -9,5 +9,6 @@ export * from './HeaderHome';
 export * from './InfoTerms';
 export * from './InfoText';
 export * from './Loading';
+export * from './MostSearch';
 export * from './PasswordInput';
 export * from './TextInput';

@@ -1,11 +1,13 @@
-import { Text } from 'react-native';
-
-import { Box } from '~/components';
+import { Box, HeaderHome, MostSearch } from '~/components';
 
 export function HomeScreen() {
   return (
-    <Box>
-      <Text>HomeScreen</Text>
-    </Box>
+    <>
+      <Box notpt>
+        <HeaderHome />
+
+        <MostSearch />
+      </Box>
+    </>
   );
 }
