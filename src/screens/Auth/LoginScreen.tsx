@@ -15,7 +15,7 @@ import { AuthScreenProps } from '~/routes';
 import { LoginScheema, loginScheema } from '~/schemas/LoginSchema';
 
 export function LoginScreen({ navigation }: AuthScreenProps<'LoginScreen'>) {
-  const { isPending, login } = useLogin(() => console.log('Login success'));
+  const { isPending, login } = useLogin();
 
   const { control, handleSubmit, reset } = useForm<LoginScheema>({
     resolver: zodResolver(loginScheema),
