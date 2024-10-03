@@ -9,7 +9,6 @@ export const api = axios.create({
 export function setAuthToken(token: string) {
   api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
-    console.log('O TOKEN PASSOU DE BOA', token);
     return config;
   });
 }
@@ -22,6 +21,9 @@ export async function login(data: LoginScheema) {
   return await api.post('/login', data);
 }
 
-export async function changePassword(data: ChangePasswordScheema) {
-  return await api.patch('/chanePassword', { data });
+export async function changePassword({ old_password, new_password }: ChangePasswordScheema) {
+  return await api.patch('/changePassword', {
+    old_password,
+    new_password,
+  });
 }
