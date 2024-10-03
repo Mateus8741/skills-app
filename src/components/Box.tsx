@@ -8,9 +8,15 @@ interface Props {
   children: React.ReactNode;
   scrollable?: boolean;
   isStatusBarHidden?: boolean;
+  notpt?: boolean;
 }
 
-export function Box({ children, scrollable = false, isStatusBarHidden = false }: Props) {
+export function Box({
+  children,
+  scrollable = false,
+  isStatusBarHidden = false,
+  notpt = false,
+}: Props) {
   const { top, bottom } = useAppSafeArea();
 
   const Container = scrollable ? ScrollView : View;
@@ -25,7 +31,7 @@ export function Box({ children, scrollable = false, isStatusBarHidden = false }:
           flex: 1,
           backgroundColor: 'white',
           paddingHorizontal: 20,
-          paddingTop: top,
+          paddingTop: notpt ? 0 : top,
           paddingBottom: bottom,
         }}
         contentContainerStyle={{ flexGrow: 1 }}

@@ -5,6 +5,7 @@ export * from './CustomIcons';
 export * from './Form/FormPasswordInput';
 export * from './Form/FormTextInput';
 export * from './Header';
+export * from './HeaderHome';
 export * from './InfoTerms';
 export * from './InfoText';
 export * from './Loading';
