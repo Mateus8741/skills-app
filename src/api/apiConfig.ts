@@ -7,7 +7,11 @@ export const api = axios.create({
 });
 
 export function setAuthToken(token: string) {
-  api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  api.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${token}`;
+    console.log('O TOKEN PASSOU DE BOA', token);
+    return config;
+  });
 }
 
 export async function register(data: StepsScheema) {

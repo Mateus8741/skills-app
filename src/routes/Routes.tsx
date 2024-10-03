@@ -4,8 +4,15 @@ import React from 'react';
 import { AppStack } from './AppStack';
 import { AuthStack } from './AuthStack';
 
-export function Routes() {
-  const user = false;
+import { setAuthToken } from '~/api';
+import { useUserStorage } from '~/contexts';
 
-  return <NavigationContainer>{user ? <AppStack /> : <AuthStack />}</NavigationContainer>;
+export function Routes() {
+  const { user } = useUserStorage();
+
+  if (user && user.token) {
+    setAuthToken(user.token);
+  }
+
+  return <NavigationContainer>{user?.user.id ? <AppStack /> : <AuthStack />}</NavigationContainer>;
 }
