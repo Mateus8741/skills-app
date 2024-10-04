@@ -7,7 +7,7 @@ import img5 from '~/assets/jobs/allJobs/electricalHelp.png';
 import img3 from '~/assets/jobs/allJobs/painting.png';
 import img1 from '~/assets/jobs/allJobs/plumbing.png';
 
-const data = [
+const $DATA = [
   {
     id: 1,
     name: 'Limpeza',
@@ -41,18 +41,21 @@ const data = [
 ];
 
 export function AllSearch() {
+  function handleNavigate(data: (typeof $DATA)[0]) {
+    console.log('data', data);
+  }
   return (
     <View className="mt-8">
       <Text className="font-bold text-xl text-black">Todas as categorias</Text>
 
       <FlatList
-        data={data}
+        data={$DATA}
         keyExtractor={(item) => String(item.id)}
         horizontal
         showsHorizontalScrollIndicator={false}
         className="mt-2"
         renderItem={({ item }) => (
-          <Pressable className="mr-4 items-center">
+          <Pressable className="mr-4 items-center" onPress={() => handleNavigate(item)}>
             <Image source={item.image} style={{ width: 56, height: 56 }} />
 
             <Text className="mt-2 font-bold text-sm text-black">{item.name}</Text>

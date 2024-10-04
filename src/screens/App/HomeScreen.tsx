@@ -1,4 +1,4 @@
-import { Box, HeaderHome, MostSearch } from '~/components';
+import { AllSearch, Box, HeaderHome, MostSearch } from '~/components';
 
 export function HomeScreen() {
   return (
@@ -7,6 +7,8 @@ export function HomeScreen() {
         <HeaderHome />
 
         <MostSearch />
+
+        <AllSearch />
       </Box>
     </>
   );
