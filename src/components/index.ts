@@ -1,3 +1,4 @@
+export * from './AllSearch';
 export * from './Box';
 export * from './CheckForm';
 export * from './CustomButton';
