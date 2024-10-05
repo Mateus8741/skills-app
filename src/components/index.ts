@@ -12,4 +12,5 @@ export * from './InfoText';
 export * from './Loading';
 export * from './MostSearch';
 export * from './PasswordInput';
+export * from './ServiceCard';
 export * from './TextInput';
