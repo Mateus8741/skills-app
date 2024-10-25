@@ -11,7 +11,7 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
 
   return (
     <Box>
-      <ImageBackground source={backgroundImage}>
+      <ImageBackground source={backgroundImage} className="bg-cover" style={{ height: 200 }}>
         <Header />
       </ImageBackground>
       <Text>ServiceDetailsScreen</Text>

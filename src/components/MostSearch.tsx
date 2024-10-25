@@ -2,8 +2,8 @@ import { FlatList, Image, Pressable, Text, View } from 'react-native';
 
 import Jb1 from '~/assets/jobs/cleaning.png';
 import Jb2 from '~/assets/jobs/electric.png';
-import Jb3 from '~/assets/jobs/installPump.png';
 import Jb4 from '~/assets/jobs/painting.png';
+import Jb3 from '~/assets/jobs/plumbing.png';
 
 const $DATA = [
   {
