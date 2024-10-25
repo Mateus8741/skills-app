@@ -4,12 +4,12 @@ import Jb2 from '~/assets/jobs/electric.png';
 import Jb7 from '~/assets/jobs/gardener.png';
 import others from '~/assets/jobs/others.png';
 import Jb4 from '~/assets/jobs/painting.png';
-import Jb3 from '~/assets/jobs/plumbing.png';
+import Jb3 from '~/assets/jobs/plumber.png';
 
 export const mapImageDetails = {
   CLEANER: Jb1,
   ELECTRICIAN: Jb2,
-  PLUMBING: Jb3,
+  PLUMBER: Jb3,
   PAINTER: Jb4,
   BRICKLAYER: Jb5,
   //   BABYSITTER: Jb6,
