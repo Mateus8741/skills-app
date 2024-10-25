@@ -1,7 +1,7 @@
 import { FlatList, Image, Pressable, Text, View } from 'react-native';
 
 import img6 from '~/assets/jobs/allJobs/babySitting.png';
-import img2 from '~/assets/jobs/allJobs/carpentry.png';
+import img2 from '~/assets/jobs/allJobs/bricklayer.png';
 import img4 from '~/assets/jobs/allJobs/cleaning.png';
 import img5 from '~/assets/jobs/allJobs/electricalHelp.png';
 import img3 from '~/assets/jobs/allJobs/painting.png';
@@ -15,7 +15,7 @@ const $DATA = [
   },
   {
     id: 2,
-    name: 'Marcenaria',
+    name: 'Pedreiro',
     image: img2,
   },
   {
