@@ -32,7 +32,7 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
 
         <View className="mt-5 gap-1">
           <Text className="font-bold text-xl">Duration</Text>
-          <Text className="text-gray-500">{details.duration}</Text>
+          <Text className="text-gray-500">duracation of service</Text>
         </View>
 
         <LocationDetails {...details.location} />
