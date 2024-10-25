@@ -1,6 +1,6 @@
 type ServiceCategory = 'ELECTRICIAN' | 'PLUMBER' | 'PAINTER' | 'BRICKLAYER' | 'GARDENER' | 'OTHERS';
 
-interface ServiceLocation {
+export interface ServiceLocation {
   id: string;
   street: string;
   neighborhood: string;

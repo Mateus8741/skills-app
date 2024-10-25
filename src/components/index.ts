@@ -10,6 +10,7 @@ export * from './HeaderHome';
 export * from './InfoTerms';
 export * from './InfoText';
 export * from './Loading';
+export * from './LocationDetails';
 export * from './MostSearch';
 export * from './PasswordInput';
 export * from './ServiceCard';
