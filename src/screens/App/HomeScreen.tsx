@@ -7,7 +7,7 @@ import { ServiceCardProps } from '~/schemas';
 export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
   function handleServicePress(data: ServiceCardProps) {
     console.log(data);
-    // navigation.navigate('ServiceDetailsScreen', { service: data });
+    navigation.navigate('ServiceDetailsScreen', data);
   }
 
   return (
