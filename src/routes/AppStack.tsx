@@ -4,8 +4,12 @@ import React from 'react';
 
 import { AppTabBottomTabParamList, AppTabNavigator } from './BottomTabsNavigation/AppTabNavigator';
 
+import { ServiceCardProps } from '~/schemas';
+import { ServiceDetailsScreen } from '~/screens';
+
 export type AppStackParamList = {
   AppTabNavigator: NavigatorScreenParams<AppTabBottomTabParamList>;
+  ServiceDetailsScreen: ServiceCardProps;
 };
 
 export function AppStack() {
@@ -19,6 +23,7 @@ export function AppStack() {
         fullScreenGestureEnabled: true,
       }}>
       <Screen name="AppTabNavigator" component={AppTabNavigator} />
+      <Screen name="ServiceDetailsScreen" component={ServiceDetailsScreen} />
     </Navigator>
   );
 }
