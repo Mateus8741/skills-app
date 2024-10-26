@@ -3,7 +3,7 @@ import { ImageBackground, Text, View } from 'react-native';
 
 import { Box, Header, LocationDetails } from '~/components';
 import { AppScreenProps } from '~/routes';
-import { mapImageDetails } from '~/utils';
+import { calculateInterval, mapImageDetails } from '~/utils';
 
 export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsScreen'>) {
   const details = route.params;
@@ -11,30 +11,33 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
   const backgroundImage =
     mapImageDetails[details.category as keyof typeof mapImageDetails] || mapImageDetails.OTHERS;
 
+  const interval = calculateInterval(new Date(details.createdAt), new Date());
+
   return (
     <>
-      <ImageBackground
-        source={backgroundImage}
-        className="bg-cover pl-5 pt-14"
-        style={{ height: 200 }}>
+      <ImageBackground source={backgroundImage} className="h-80 bg-cover pl-5 pt-14">
         <Header />
       </ImageBackground>
 
       <Box notpt>
-        <View className="mt-5 flex-row items-center gap-1">
-          <View className="flex-row items-center gap-1">
-            <Star size={16} color="black" fill="black" />
-            <Text className="text-gray-500">{details.rating}</Text>
-          </View>
+        <View className="mt-5 gap-1">
+          <Text className="font-bold text-2xl">{details.name}</Text>
 
-          <View className="flex-row items-center gap-1">
-            <Timer size={16} color="black" />
-            <Text className="text-gray-500">{details.createdAt}</Text>
+          <View className="flex-row items-center gap-2">
+            <View className="flex-row items-center gap-1">
+              <Star size={16} color="black" fill="black" />
+              <Text className="text-gray-500">{details.rating}</Text>
+            </View>
+
+            <View className="flex-row items-center gap-1">
+              <Timer size={16} color="black" />
+              <Text className="text-gray-500">{interval}</Text>
+            </View>
           </View>
         </View>
 
         <View className="mt-5 gap-1">
-          <Text className="font-bold text-2xl">{details.name}</Text>
+          <Text className="font-bold text-xl">Descrição</Text>
           <Text className="text-gray-500">{details.description}</Text>
         </View>
 
