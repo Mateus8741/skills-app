@@ -8,7 +8,7 @@ export interface ServiceLocation {
   reference: string;
   number: number;
   serviceId: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface ServiceCardProps {
