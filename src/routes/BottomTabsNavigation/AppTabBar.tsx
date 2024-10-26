@@ -6,7 +6,7 @@ import Animated, { BounceIn } from 'react-native-reanimated';
 import { AppTabBottomTabParamList } from './AppTabNavigator';
 import { mapScreenToProps } from './mapScreenToProps';
 
-import { CustonIcons } from '~/components';
+import { CustomIcons } from '~/components';
 import { useAppSafeArea } from '~/hooks';
 import { useShadowProps } from '~/utils';
 
@@ -56,7 +56,7 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
             activeOpacity={0.7}
             className={
               isFocused
-                ? 'flex-row items-center justify-center rounded-xl bg-green-900 py-3'
+                ? 'flex-col items-center justify-center rounded-xl bg-green-900 py-3'
                 : 'items-center justify-center py-3'
             }
             accessibilityRole="button"
@@ -66,7 +66,7 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
             onPress={onPress}
             onLongPress={onLongPress}
             style={{ flex: 1 }}>
-            <CustonIcons
+            <CustomIcons
               color="white"
               icon={isFocused ? tabItem.icon.focused : tabItem.icon.unfocused}
               entering={animation || undefined}
@@ -75,7 +75,7 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
 
             {isFocused && (
               <Animated.Text
-                className="ml-3 font-bold text-sm"
+                className="font-bold text-sm"
                 style={{ color: 'white' }}
                 entering={animation || undefined}>
                 {tabItem.label}
