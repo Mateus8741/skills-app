@@ -8,7 +8,7 @@ type IconProps = {
   entering?: any;
 };
 
-export function CustonIcons({ icon, color, size, entering }: IconProps) {
+export function CustomIcons({ icon, color, size, entering }: IconProps) {
   const AnimatedIcon = Animated.createAnimatedComponent(MaterialIcons);
 
   return <AnimatedIcon name={icon as any} size={size} color={color} entering={entering} />;

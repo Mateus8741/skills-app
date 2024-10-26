@@ -8,7 +8,6 @@ export interface ServiceLocation {
   reference: string;
   number: number;
   serviceId: string;
-  createdAt: string;
 }
 
 export interface ServiceCardProps {
@@ -19,4 +18,5 @@ export interface ServiceCardProps {
   rating: number;
   isAuthenticaded: boolean;
   location: ServiceLocation;
+  createdAt: string;
 }
