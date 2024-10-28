@@ -42,28 +42,18 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
             <Text className="text-gray-500">{details.description}</Text>
           </View>
 
-          <View className="mt-5 gap-1">
-            <Text className="font-bold text-xl">Preço</Text>
-            <Text className="text-gray-500">{details.price}</Text>
-          </View>
-
-          <View className="mt-5 gap-1">
-            <Text className="font-bold text-xl">Duração</Text>
-            <Text className="text-gray-500">duracation of service</Text>
-          </View>
-
           <LocationDetails {...details.location} />
         </View>
 
-        <View className="-mx-6 flex-shrink border-t border-gray-300 py-6">
-          <View className="flex-row items-center px-6">
-            <View className="flex-1">
-              <Text className="text-2xl text-gray-500">Preço</Text>
-              <Text className="font-bold text-xl text-black underline">{details.price}</Text>
-            </View>
+        <View className="-mx-6 h-px bg-gray-300" />
 
-            <CustomButton variant="secondary" title="Agendar" />
+        <View className="flex-row items-center py-3">
+          <View className="flex-1">
+            <Text className="text-2xl text-gray-500">Preço</Text>
+            <Text className="font-bold text-xl text-black underline">{details.price}</Text>
           </View>
+
+          <CustomButton variant="secondary" title="Agendar" />
         </View>
       </Box>
     </>
