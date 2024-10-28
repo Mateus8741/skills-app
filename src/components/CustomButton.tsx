@@ -5,7 +5,8 @@ import { Loading } from './Loading';
 
 const buttonStyles = tv({
   slots: {
-    base: 'h-16 w-full items-center justify-center rounded-xl',
+    // base: 'h-16 w-full items-center justify-center rounded-xl',
+    base: 'h-16 flex-1 items-center justify-center rounded-xl',
     label: 'text-center text-xl font-bold',
     loading: 'text-white',
   },
