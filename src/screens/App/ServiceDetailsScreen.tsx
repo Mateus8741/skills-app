@@ -53,7 +53,7 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
             <Text className="font-bold text-xl text-black underline">{details.price}</Text>
           </View>
 
-          <CustomButton variant="secondary" title="Agendar" />
+          <CustomButton variant="secondary" title="Candidatar-se" />
         </View>
       </Box>
     </>
