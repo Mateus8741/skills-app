@@ -11,9 +11,9 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
 
   return (
     <>
-      <Box notpt>
-        <HeaderHome />
+      <HeaderHome />
 
+      <Box notpt scrollable>
         <MostSearch />
 
         <AllSearch />
@@ -22,7 +22,8 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
           data={$SERVICES}
           keyExtractor={(_, index) => String(index)}
           className="mt-4 px-2"
-          contentContainerStyle={{ paddingBottom: 100 }}
+          scrollEnabled={false}
+          contentContainerStyle={{ paddingBottom: 150 }}
           renderItem={({ item }) => (
             <ServiceCard service={item} onPress={() => handleServicePress(item)} />
           )}

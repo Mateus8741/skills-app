@@ -12,7 +12,7 @@ export function HeaderHome() {
 
   return (
     <ImageBackground
-      className="-mx-6 h-28 items-start justify-between bg-green-600 px-6 py-3"
+      className="items-start justify-between bg-green-600 px-6 py-3"
       style={{
         paddingTop: top,
       }}
