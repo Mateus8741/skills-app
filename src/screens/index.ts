@@ -1,4 +1,5 @@
 export * from './App/HomeScreen';
+export * from './App/NewServiceScreen';
 export * from './App/ServiceDetailsScreen';
 export * from './Auth/ForgotPasswordScreen';
 export * from './Auth/LoginScreen';
