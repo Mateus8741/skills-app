@@ -6,7 +6,6 @@ import { ServiceCardProps } from '~/schemas';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
   function handleServicePress(data: ServiceCardProps) {
-    console.log(data);
     navigation.navigate('ServiceDetailsScreen', data);
   }
 
@@ -39,13 +38,16 @@ const $SERVICES: ServiceCardProps[] = [
     price: 'R$ 80,00',
     rating: 4.5,
     isAuthenticaded: true,
+    userPhoneNumber: '88999999999',
     location: {
-      street: 'Rua dos Bobos',
+      city: 'Barbalha',
+      state: 'CE',
+      street: 'Rua Pinto Madeira',
       neighborhood: 'Centro',
-      id: '1',
       complement: 'complemento',
       reference: 'referencia',
-      number: 0,
+      number: 340,
+      id: '1',
       serviceId: '123',
     },
     description: 'Descrição do serviço',
@@ -57,7 +59,10 @@ const $SERVICES: ServiceCardProps[] = [
     price: 'R$ 100,00',
     rating: 4.5,
     isAuthenticaded: true,
+    userPhoneNumber: '88999999999',
     location: {
+      city: 'Barbalha',
+      state: 'CE',
       street: 'Rua dos Bobos',
       neighborhood: 'Centro',
       id: '1',
@@ -75,7 +80,10 @@ const $SERVICES: ServiceCardProps[] = [
     price: 'R$ 120,00',
     rating: 4.5,
     isAuthenticaded: true,
+    userPhoneNumber: '88999999999',
     location: {
+      city: 'Barbalha',
+      state: 'CE',
       street: 'Rua dos Bobos',
       neighborhood: 'Centro',
       id: '1',
@@ -93,7 +101,10 @@ const $SERVICES: ServiceCardProps[] = [
     price: 'R$ 80,00',
     rating: 4.5,
     isAuthenticaded: true,
+    userPhoneNumber: '88999999999',
     location: {
+      city: 'Barbalha',
+      state: 'CE',
       street: 'Rua dos Bobos',
       neighborhood: 'Centro',
       id: '1',
@@ -111,7 +122,10 @@ const $SERVICES: ServiceCardProps[] = [
     price: 'R$ 80,00',
     rating: 4.5,
     isAuthenticaded: true,
+    userPhoneNumber: '88999999999',
     location: {
+      city: 'Barbalha',
+      state: 'CE',
       street: 'Rua dos Bobos',
       neighborhood: 'Centro',
       id: '1',

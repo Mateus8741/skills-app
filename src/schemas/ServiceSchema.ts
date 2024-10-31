@@ -2,6 +2,8 @@ type ServiceCategory = 'ELECTRICIAN' | 'PLUMBER' | 'PAINTER' | 'BRICKLAYER' | 'G
 
 export interface ServiceLocation {
   id: string;
+  city: string;
+  state: string;
   street: string;
   neighborhood: string;
   complement: string;
@@ -15,6 +17,7 @@ export interface ServiceCardProps {
   description: string;
   price: string;
   category: ServiceCategory;
+  userPhoneNumber: string;
   rating: number;
   isAuthenticaded: boolean;
   location: ServiceLocation;

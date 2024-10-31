@@ -1,7 +1,7 @@
 import { Star, Timer } from 'lucide-react-native';
 import { ImageBackground, Text, View } from 'react-native';
 
-import { Box, CustomButton, Header, LocationDetails } from '~/components';
+import { Box, ContactDetails, CustomButton, Header, LocationDetails } from '~/components';
 import { AppScreenProps } from '~/routes';
 import { calculateInterval, mapImageDetails } from '~/utils';
 
@@ -43,6 +43,8 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
           </View>
 
           <LocationDetails {...details.location} />
+
+          <ContactDetails location={details.location} userPhoneNumber={details.userPhoneNumber} />
         </View>
 
         <View className="-mx-6 h-px bg-gray-300" />
