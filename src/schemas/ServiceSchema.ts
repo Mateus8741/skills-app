@@ -9,6 +9,8 @@ export interface ServiceLocation {
   complement: string;
   reference: string;
   number: number;
+  latitude: number;
+  longitude: number;
   serviceId: string;
 }
 
