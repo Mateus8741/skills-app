@@ -29,8 +29,8 @@ export function LoginScreen({ navigation }: AuthScreenProps<'LoginScreen'>) {
   });
 
   function handleLogin(data: LoginScheema) {
-    reset();
     login(data);
+    reset();
   }
 
   function handleForgotPassword() {
