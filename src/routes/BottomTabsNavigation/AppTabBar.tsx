@@ -1,7 +1,7 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Animated, { BounceIn } from 'react-native-reanimated';
+import Animated, { BounceIn, FadeIn } from 'react-native-reanimated';
 
 import { AppTabBottomTabParamList } from './AppTabNavigator';
 import { mapScreenToProps } from './mapScreenToProps';
@@ -15,14 +15,11 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
 
   return (
     <View
-      className="absolute bottom-8 mx-5 flex-row rounded-3xl bg-green-600 p-3"
-      style={[useShadowProps()]}>
+      className="flex-row border-t-[0.2px] border-gray-300 bg-white p-2 px-5"
+      style={[useShadowProps(), { paddingBottom: bottom }]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
-
         const isFocused = state.index === index;
-
-        const animation = isFocused && BounceIn;
 
         const onPress = () => {
           const event = navigation.emit({
@@ -32,7 +29,6 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
             navigation.navigate({
               name: route.name,
               params: route.params,
@@ -54,30 +50,25 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
           <TouchableOpacity
             key={route.key}
             activeOpacity={0.7}
-            className={
-              isFocused
-                ? 'flex-col items-center justify-center rounded-xl bg-green-900 py-3'
-                : 'items-center justify-center py-3'
-            }
+            className={`flex-1 items-center justify-center py-1 ${
+              isFocused ? 'rounded-xl bg-green-100' : ''
+            }`}
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}>
-            <CustomIcons
-              color="white"
-              icon={isFocused ? tabItem.icon.focused : tabItem.icon.unfocused}
-              entering={animation || undefined}
-              size={20}
-            />
+            onLongPress={onLongPress}>
+            <Animated.View entering={isFocused ? BounceIn : FadeIn}>
+              <CustomIcons
+                color={isFocused ? '#16a34a' : '#6b7280'}
+                icon={isFocused ? tabItem.icon.focused : tabItem.icon.unfocused}
+                size={24}
+              />
+            </Animated.View>
 
             {isFocused && (
-              <Animated.Text
-                className="font-bold text-sm"
-                style={{ color: 'white' }}
-                entering={animation || undefined}>
+              <Animated.Text className="mt-1 font-bold text-xs text-green-600" entering={BounceIn}>
                 {tabItem.label}
               </Animated.Text>
             )}
