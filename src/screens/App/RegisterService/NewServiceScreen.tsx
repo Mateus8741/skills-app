@@ -26,7 +26,6 @@ export function NewServiceScreen() {
     watchIsLocationPermitted();
   }, []);
 
-  
   const { control, handleSubmit, setValue, watch } = useForm<CreateServiceSchema>({
     resolver: zodResolver(createServiceSchema),
     defaultValues: {
@@ -115,7 +114,7 @@ export function NewServiceScreen() {
           </View>
 
           {/* Map View */}
-          <View className=" rounded-lg overflow-hidden">
+          <View className=" overflow-hidden rounded-lg">
             <MapView
               ref={mapRef}
               initialRegion={{
@@ -129,8 +128,7 @@ export function NewServiceScreen() {
                 borderRadius: 20,
                 height: 250,
               }}
-              onPress={handleMapPress}
-            >
+              onPress={handleMapPress}>
               <Marker
                 coordinate={{
                   latitude,
