@@ -24,7 +24,8 @@ export function Box({
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={-25}>
       <StatusBar style="dark" hidden={isStatusBarHidden} />
       <Container
         style={{

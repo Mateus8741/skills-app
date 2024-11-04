@@ -3,7 +3,7 @@ import { requestForegroundPermissionsAsync } from 'expo-location';
 import { MapPin } from 'lucide-react-native';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import { Box, CustomButton, FormTextInput, Header } from '~/components';
@@ -62,148 +62,153 @@ export function NewServiceScreen() {
   }
 
   return (
-    <Box scrollable>
+    <Box>
       <Header title="Novo Serviço" />
+      <ScrollView className="flex-grow" showsVerticalScrollIndicator={false}>
+        <View className="my-6 flex-1 gap-6">
+          <View className="gap-4">
+            <Text className="font-bold text-xl text-black">Detalhes do Serviço</Text>
 
-      <View className="mt-6 flex-1 gap-6">
-        {/* Service Details Section */}
-        <View className="gap-4">
-          <Text className="font-bold text-xl text-black">Detalhes do Serviço</Text>
-
-          <FormTextInput
-            control={control}
-            name="name"
-            label="Nome do serviço"
-            placeholder="Ex: Eletricista residencial"
-          />
-
-          <FormTextInput
-            control={control}
-            name="description"
-            label="Descrição"
-            placeholder="Descreva os detalhes do seu serviço"
-            multiline
-            numberOfLines={4}
-          />
-
-          <View className="flex-row gap-4">
             <FormTextInput
               control={control}
-              name="category"
-              label="Categoria"
-              placeholder="Ex: Elétrica"
-              moreClassName="flex-1"
+              name="name"
+              label="Nome do serviço"
+              placeholder="Ex: Eletricista residencial"
             />
 
             <FormTextInput
               control={control}
-              name="price"
-              label="Preço"
-              placeholder="R$ 0,00"
-              keyboardType="numeric"
-              moreClassName="flex-1"
+              name="description"
+              label="Descrição"
+              placeholder="Descreva os detalhes do seu serviço"
+              multiline
+              numberOfLines={4}
             />
-          </View>
-        </View>
 
-        {/* Location Section */}
-        <View className="gap-4">
-          <View className="flex-row items-center gap-2">
-            <MapPin size={24} color="black" />
-            <Text className="font-bold text-xl text-black">Localização</Text>
-          </View>
-
-          {/* Map View */}
-          <View className=" overflow-hidden rounded-lg">
-            <MapView
-              ref={mapRef}
-              initialRegion={{
-                latitude: location?.latitude || 0,
-                longitude: location?.longitude || 0,
-                latitudeDelta: 0.005,
-                longitudeDelta: 0.005,
-              }}
-              style={{
-                marginTop: 10,
-                borderRadius: 20,
-                height: 250,
-              }}
-              onPress={handleMapPress}>
-              <Marker
-                coordinate={{
-                  latitude,
-                  longitude,
-                }}
-                title="Sua localização"
-                description="Você está aqui"
+            <View className="flex-row gap-4">
+              <FormTextInput
+                control={control}
+                name="category"
+                label="Categoria"
+                placeholder="Ex: Elétrica"
+                moreClassName="flex-1"
               />
-            </MapView>
+
+              <FormTextInput
+                control={control}
+                name="price"
+                label="Preço"
+                placeholder="R$ 0,00"
+                keyboardType="numeric"
+                moreClassName="flex-1"
+              />
+            </View>
           </View>
 
-          <FormTextInput
-            control={control}
-            name="location.city"
-            label="Cidade"
-            placeholder="Sua cidade"
-            moreClassName="flex-1"
-          />
+          <View className="gap-4">
+            <View className="flex-row items-center gap-2">
+              <MapPin size={24} color="black" />
+              <Text className="font-bold text-xl text-black">Localização</Text>
+            </View>
 
-          <FormTextInput
-            control={control}
-            name="location.state"
-            label="Estado"
-            placeholder="UF"
-            moreClassName="w-24"
-          />
+            <View className=" overflow-hidden rounded-lg">
+              <MapView
+                ref={mapRef}
+                initialRegion={{
+                  latitude: location?.latitude || 0,
+                  longitude: location?.longitude || 0,
+                  latitudeDelta: 0.005,
+                  longitudeDelta: 0.005,
+                }}
+                style={{
+                  marginTop: 10,
+                  borderRadius: 20,
+                  height: 250,
+                }}
+                onPress={handleMapPress}>
+                <Marker
+                  coordinate={{
+                    latitude,
+                    longitude,
+                  }}
+                  title="Sua localização"
+                  description="Você está aqui"
+                />
+              </MapView>
+            </View>
 
-          <FormTextInput
-            control={control}
-            name="location.street"
-            label="Rua"
-            placeholder="Nome da rua"
-          />
+            <View className="flex-row gap-4">
+              <FormTextInput
+                control={control}
+                name="location.street"
+                label="Rua"
+                placeholder="Nome da rua"
+                moreClassName="flex-1"
+              />
 
-          <View className="flex-row gap-4">
+              <FormTextInput
+                control={control}
+                name="location.number"
+                label="Número"
+                placeholder="Nº"
+                keyboardType="numeric"
+                moreClassName="w-24"
+              />
+            </View>
+
+            <View className="flex-row gap-4">
+              <FormTextInput
+                control={control}
+                name="location.city"
+                label="Cidade"
+                placeholder="Sua cidade"
+                moreClassName="flex-1"
+              />
+
+              <FormTextInput
+                control={control}
+                name="location.neighborhood"
+                label="Bairro"
+                placeholder="Seu bairro"
+                moreClassName="flex-1"
+              />
+            </View>
+
+            <View className="flex-row gap-4">
+              <FormTextInput
+                control={control}
+                name="location.complement"
+                label="Complemento"
+                placeholder="Apto, Bloco, etc (opcional)"
+                moreClassName="flex-1"
+              />
+
+              <FormTextInput
+                control={control}
+                name="location.state"
+                label="Estado"
+                placeholder="UF"
+                moreClassName="w-24"
+              />
+            </View>
+
             <FormTextInput
               control={control}
-              name="location.neighborhood"
-              label="Bairro"
-              placeholder="Seu bairro"
-              moreClassName="flex-1"
-            />
-
-            <FormTextInput
-              control={control}
-              name="location.number"
-              label="Número"
-              placeholder="Nº"
-              keyboardType="numeric"
-              moreClassName="w-24"
+              name="location.reference"
+              label="Ponto de referência"
+              placeholder="Ex: Próximo à padaria (opcional)"
             />
           </View>
-
-          <FormTextInput
-            control={control}
-            name="location.complement"
-            label="Complemento"
-            placeholder="Apto, Bloco, etc (opcional)"
-          />
-
-          <FormTextInput
-            control={control}
-            name="location.reference"
-            label="Ponto de referência"
-            placeholder="Ex: Próximo à padaria (opcional)"
-          />
         </View>
-      </View>
+      </ScrollView>
 
-      <CustomButton
-        title="Cadastrar serviço"
-        variant="secondary"
-        onPress={handleSubmit(handleCreateService)}
-        className="mt-6"
-      />
+      <View className="mt-4 bg-white">
+        <CustomButton
+          title="Cadastrar serviço"
+          variant="secondary"
+          onPress={handleSubmit(handleCreateService)}
+        />
+      </View>
     </Box>
   );
 }
