@@ -3,11 +3,10 @@ import React from 'react';
 
 import { AppTabBar } from './AppTabBar';
 
-import { HomeScreen, NewServiceScreen } from '~/screens';
+import { HomeScreen } from '~/screens';
 
 export type AppTabBottomTabParamList = {
   HomeScreen: undefined;
-  NewServiceScreen: undefined;
 };
 
 function renderTabBar(props: BottomTabBarProps) {
@@ -24,7 +23,6 @@ export function AppTabNavigator() {
       }}
       tabBar={renderTabBar}>
       <Screen name="HomeScreen" component={HomeScreen} />
-      <Screen name="NewServiceScreen" component={NewServiceScreen} />
     </Navigator>
   );
 }

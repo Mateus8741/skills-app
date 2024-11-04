@@ -1,3 +1,5 @@
+import { PlusCircle } from 'lucide-react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { AllSearch, Box, HeaderHome, MostSearch, ServiceCard } from '~/components';
@@ -9,6 +11,10 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
     navigation.navigate('ServiceDetailsScreen', data);
   }
 
+  function handleAddService() {
+    navigation.navigate('NewServiceScreen');
+  }
+
   return (
     <>
       <HeaderHome />
@@ -18,10 +24,22 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
 
         <AllSearch />
 
+        <View className="mt-6 flex-row items-center justify-between border-b border-gray-200 py-2">
+          <Text className="font-subtitle text-2xl text-black">Serviços</Text>
+
+          <TouchableOpacity
+            className="flex-row items-center gap-2 rounded-full bg-green-500 p-2"
+            activeOpacity={0.7}
+            onPress={handleAddService}>
+            <Text className="font-subtitle text-black">Adicionar serviço</Text>
+            <PlusCircle size={24} color="white" fill="green" />
+          </TouchableOpacity>
+        </View>
+
         <FlatList
           data={$SERVICES}
           keyExtractor={(_, index) => String(index)}
-          className="mt-4 px-2"
+          className="px-2"
           scrollEnabled={false}
           contentContainerStyle={{ paddingBottom: 150 }}
           renderItem={({ item }) => (

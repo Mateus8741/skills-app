@@ -26,11 +26,4 @@ export const mapScreenToProps: Record<
       unfocused: 'home',
     },
   },
-  NewServiceScreen: {
-    label: 'Novo serviço',
-    icon: {
-      focused: 'add',
-      unfocused: 'add',
-    },
-  },
 };
