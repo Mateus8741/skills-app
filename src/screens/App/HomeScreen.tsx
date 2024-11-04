@@ -24,15 +24,15 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
 
         <AllSearch />
 
-        <View className="mt-6 flex-row items-center justify-between border-b border-gray-200 py-2">
-          <Text className="font-subtitle text-2xl text-black">Serviços</Text>
+        <View className="mt-4 flex-row items-center justify-between border-b border-gray-200 py-3">
+          <Text className="font-subtitle text-xl text-gray-900">Serviços</Text>
 
           <TouchableOpacity
-            className="flex-row items-center gap-2 rounded-full bg-green-500 p-2"
+            className="flex-row items-center gap-2 rounded-full bg-green-50 px-4 py-2 active:bg-green-100"
             activeOpacity={0.7}
             onPress={handleAddService}>
-            <Text className="font-subtitle text-black">Adicionar serviço</Text>
-            <PlusCircle size={24} color="white" fill="green" />
+            <Text className="font-subtitle text-sm text-green-600">Adicionar serviço</Text>
+            <PlusCircle size={20} color="#16a34a" />
           </TouchableOpacity>
         </View>
 
