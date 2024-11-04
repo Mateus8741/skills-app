@@ -1,5 +1,5 @@
 export * from './App/HomeScreen';
-export * from './App/NewServiceScreen';
+export * from './App/RegisterService/NewServiceScreen';
 export * from './App/ServiceDetailsScreen';
 export * from './Auth/ForgotPasswordScreen';
 export * from './Auth/LoginScreen';
@@ -9,3 +9,4 @@ export * from './Auth/Register/ConfirmLocation';
 export * from './Auth/Register/MapScreen';
 export * from './Auth/Register/Step1';
 export * from './Auth/Register/Step2';
+
