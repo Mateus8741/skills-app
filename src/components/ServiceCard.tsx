@@ -16,35 +16,42 @@ interface ServiceCardProps extends TouchableOpacityProps {
 
 export function ServiceCard({ service, ...rest }: ServiceCardProps) {
   return (
-    <TouchableOpacity className="mt-8" {...rest}>
-      <View className="rounded-lg bg-white px-6 py-4 shadow-sm">
-        <View className="flex-row items-center justify-between gap-2 border-b-2 border-gray-100 pb-4">
-          <View className="flex-row items-center gap-2">
-            <View className="flex h-12 w-12 items-center justify-center rounded-full bg-green-200">
-              <BriefcaseBusiness color="black" size={24} />
+    <TouchableOpacity 
+      className="mt-4"
+      activeOpacity={0.7}
+      {...rest}
+    >
+      <View className="rounded-xl bg-white px-5 py-4 shadow-sm">
+        <View className="flex-row items-center justify-between gap-2 border-b border-gray-100 pb-4">
+          <View className="flex-row items-center gap-3">
+            <View className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
+              <BriefcaseBusiness color="#16a34a" size={28} />
             </View>
 
-            <View className="flex-row items-center gap-1">
-              <Text className="font-semibold text-black">{service.name}</Text>
-
-              {service.isAuthenticaded && <BadgeCheck color="white" fill="green" size={18} />}
+            <View>
+              <View className="flex-row items-center gap-1">
+                <Text className="text-lg font-bold text-gray-800">{service.name}</Text>
+                {service.isAuthenticaded && <BadgeCheck color="#16a34a" size={20} />}
+              </View>
+              
+              <View className="flex-row items-center gap-1 mt-1">
+                <Star color="#fbbf24" fill="#fbbf24" size={16} />
+                <Text className="text-sm text-gray-500">{service.rating}</Text>
+              </View>
             </View>
-          </View>
-
-          <View className="flex-row items-center gap-2">
-            <Star color="black" fill="black" size={14} />
-            <Text className="text-gray-500">({service.rating})</Text>
           </View>
         </View>
 
-        <View className="mt-4 flex-row items-center gap-2">
-          <MapPinCheck color="black" size={16} />
-          <Text className="text-gray-500">{service.location.street}</Text>
-        </View>
+        <View className="mt-4 space-y-2">
+          <View className="flex-row items-center gap-3">
+            <MapPinCheck color="#6b7280" size={18} />
+            <Text className="text-sm text-gray-600">{service.location.street}</Text>
+          </View>
 
-        <View className="mt-2 flex-row items-center gap-2">
-          <Banknote color="black" size={16} />
-          <Text className="text-gray-500">{service.price}</Text>
+          <View className="flex-row items-center gap-3">
+            <Banknote color="#16a34a" size={18} />
+            <Text className="text-base font-semibold text-green-600">{service.price}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
