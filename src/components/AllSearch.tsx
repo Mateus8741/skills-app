@@ -44,21 +44,34 @@ export function AllSearch() {
   function handleNavigate(data: (typeof $DATA)[0]) {
     console.log('data', data);
   }
+
   return (
     <View className="mt-8">
-      <Text className="font-bold text-xl text-black">Todas as categorias</Text>
+      <View className="mb-4 flex-row items-center justify-between">
+        <Text className="font-bold text-2xl text-gray-800">Todas as categorias</Text>
+        <Pressable className="px-3 py-1">
+          <Text className="font-medium text-green-600">Ver todas</Text>
+        </Pressable>
+      </View>
 
       <FlatList
         data={$DATA}
         keyExtractor={(item) => String(item.id)}
         horizontal
         showsHorizontalScrollIndicator={false}
-        className="mt-2"
+        contentContainerStyle={{ paddingRight: 20 }}
         renderItem={({ item }) => (
           <Pressable className="mr-4 items-center" onPress={() => handleNavigate(item)}>
-            <Image source={item.image} style={{ width: 56, height: 56 }} />
+            <View className="rounded-2xl bg-white p-1 shadow-sm">
+              <Image source={item.image} className="h-24 w-24 rounded-2xl" resizeMode="cover" />
+            </View>
 
-            <Text className="mt-2 font-bold text-sm text-black">{item.name}</Text>
+            <Text className="mt-2 text-center text-sm font-medium text-gray-700">{item.name}</Text>
+
+            <Text className="mt-1 text-xs text-gray-500">
+              {/* Número aleatório de serviços para exemplo */}
+              {Math.floor(Math.random() * 100) + 50} serviços
+            </Text>
           </Pressable>
         )}
       />
