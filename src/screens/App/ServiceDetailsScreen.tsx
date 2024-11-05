@@ -1,5 +1,5 @@
 import { Star, Timer } from 'lucide-react-native';
-import { ImageBackground, Text, View } from 'react-native';
+import { ImageBackground, ScrollView, Text, View } from 'react-native';
 
 import { ContactDetails, CustomButton, Header, LocationDetails } from '~/components';
 import { AppScreenProps } from '~/routes';
@@ -22,7 +22,9 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
       </ImageBackground>
 
       <View className="-mt-8 flex-1 rounded-t-3xl bg-white px-6">
-        <View className="flex-1">
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 100 }}
+          showsVerticalScrollIndicator={false}>
           <View className="mt-6 gap-1">
             <View className="flex-row items-center justify-between">
               <Text className="font-bold text-2xl text-gray-800">{details.name}</Text>
@@ -56,7 +58,7 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
           <View className="mb-6 mt-4 rounded-2xl bg-gray-50 p-4">
             <ContactDetails location={details.location} userPhoneNumber={details.userPhoneNumber} />
           </View>
-        </View>
+        </ScrollView>
 
         <View className="mb-6 border-t border-gray-100 py-4">
           <CustomButton variant="secondary" title="Candidatar-se" />
