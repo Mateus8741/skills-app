@@ -1,7 +1,7 @@
 import { Star, Timer } from 'lucide-react-native';
 import { ImageBackground, Text, View } from 'react-native';
 
-import { Box, ContactDetails, CustomButton, Header, LocationDetails } from '~/components';
+import { ContactDetails, CustomButton, Header, LocationDetails } from '~/components';
 import { AppScreenProps } from '~/routes';
 import { calculateInterval, mapImageDetails } from '~/utils';
 
@@ -14,50 +14,54 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
   const interval = calculateInterval(new Date(details.createdAt), new Date());
 
   return (
-    <>
-      <ImageBackground source={backgroundImage} className="h-80 bg-cover pl-5 pt-14">
-        <Header />
+    <View className="flex-1 bg-white">
+      <ImageBackground source={backgroundImage} className="h-72" imageStyle={{ opacity: 0.9 }}>
+        <View className="h-full bg-black/20 pl-5 pt-14">
+          <Header />
+        </View>
       </ImageBackground>
 
-      <Box notpt>
+      <View className="-mt-8 flex-1 rounded-t-3xl bg-white px-6">
         <View className="flex-1">
-          <View className="mt-5 gap-1">
-            <Text className="font-bold text-2xl">{details.name}</Text>
+          <View className="mt-6 gap-1">
+            <View className="flex-row items-center justify-between">
+              <Text className="font-bold text-2xl text-gray-800">{details.name}</Text>
+              <View className="rounded-full bg-green-100 px-3 py-1">
+                <Text className="font-medium text-green-700">{details.price}</Text>
+              </View>
+            </View>
 
-            <View className="flex-row items-center gap-2">
+            <View className="mt-2 flex-row items-center gap-4">
               <View className="flex-row items-center gap-1">
-                <Star size={16} color="black" fill="black" />
-                <Text className="text-gray-500">{details.rating}</Text>
+                <Star size={16} color="#fbbf24" fill="#fbbf24" />
+                <Text className="font-medium text-gray-600">{details.rating}</Text>
               </View>
 
               <View className="flex-row items-center gap-1">
-                <Timer size={16} color="black" />
-                <Text className="text-gray-500">{interval}</Text>
+                <Timer size={16} color="#6b7280" />
+                <Text className="text-gray-600">{interval}</Text>
               </View>
             </View>
           </View>
 
-          <View className="mt-5 gap-1">
-            <Text className="font-bold text-xl">Descrição</Text>
-            <Text className="text-gray-500">{details.description}</Text>
+          <View className="mt-6">
+            <Text className="mb-2 font-bold text-xl text-gray-800">Descrição</Text>
+            <Text className="leading-6 text-gray-600">{details.description}</Text>
           </View>
 
-          <LocationDetails {...details.location} />
+          <View className="mt-6 rounded-2xl bg-gray-50 p-4">
+            <LocationDetails {...details.location} />
+          </View>
 
-          <ContactDetails location={details.location} userPhoneNumber={details.userPhoneNumber} />
+          <View className="mb-6 mt-4 rounded-2xl bg-gray-50 p-4">
+            <ContactDetails location={details.location} userPhoneNumber={details.userPhoneNumber} />
+          </View>
         </View>
 
-        <View className="-mx-6 h-px bg-gray-300" />
-
-        <View className="flex-row items-center py-3">
-          <View className="flex-1">
-            <Text className="text-2xl text-gray-500">Preço</Text>
-            <Text className="font-bold text-xl text-black underline">{details.price}</Text>
-          </View>
-
+        <View className="mb-6 border-t border-gray-100 py-4">
           <CustomButton variant="secondary" title="Candidatar-se" />
         </View>
-      </Box>
-    </>
+      </View>
+    </View>
   );
 }

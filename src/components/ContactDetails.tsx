@@ -63,7 +63,7 @@ export function ContactDetails({ location, userPhoneNumber }: ContactDetailsProp
   };
 
   return (
-    <View className="mt-12 flex-row gap-4">
+    <View className="flex-row gap-4">
       <Pressable className="items-center gap-2" onPress={() => handlePress('call')}>
         <View className="rounded-full bg-green-200 px-5 py-2">
           <Phone size={24} color="green" fill="green" />
