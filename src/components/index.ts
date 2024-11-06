@@ -1,5 +1,6 @@
 export * from './AllSearch';
 export * from './Box';
+export * from './CategoryCard';
 export * from './CheckForm';
 export * from './ContactDetails';
 export * from './CustomButton';
