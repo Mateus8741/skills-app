@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { FlatList, Image, Pressable, Text, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 
@@ -11,27 +12,36 @@ const $DATA = [
     id: 1,
     name: 'Limpeza',
     image: Jb1,
+    category: 'CLEANING',
   },
   {
     id: 2,
     name: 'Elétrica',
     image: Jb2,
+    category: 'ELECTRICIAN',
   },
   {
     id: 3,
     name: 'Instalação de bomba',
     image: Jb3,
+    category: 'PLUMBER',
   },
   {
     id: 4,
     name: 'Pintura',
     image: Jb4,
+    category: 'PAINTER',
   },
 ];
 
 export function MostSearch() {
+  const { navigate } = useNavigation();
+
   function handleNavigate(data: (typeof $DATA)[0]) {
-    console.log('data', data);
+    navigate('CategoryServicesScreen', {
+      category: data.category,
+      name: data.name,
+    });
   }
 
   return (

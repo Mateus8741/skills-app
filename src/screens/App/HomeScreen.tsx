@@ -51,7 +51,7 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
   );
 }
 
-const $SERVICES: ServiceCardProps[] = [
+export const $SERVICES: ServiceCardProps[] = [
   {
     name: 'Eletricista',
     price: 'R$ 80,00',

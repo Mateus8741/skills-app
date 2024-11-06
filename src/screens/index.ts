@@ -1,3 +1,4 @@
+export * from './App/CategoryServicesScreen';
 export * from './App/HomeScreen';
 export * from './App/ProfileScreen';
 export * from './App/RegisterService/NewServiceScreen';

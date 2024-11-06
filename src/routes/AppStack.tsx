@@ -5,12 +5,16 @@ import React from 'react';
 import { AppTabBottomTabParamList, AppTabNavigator } from './BottomTabsNavigation/AppTabNavigator';
 
 import { ServiceCardProps } from '~/schemas';
-import { NewServiceScreen, ServiceDetailsScreen } from '~/screens';
+import { CategoryServicesScreen, NewServiceScreen, ServiceDetailsScreen } from '~/screens';
 
 export type AppStackParamList = {
   AppTabNavigator: NavigatorScreenParams<AppTabBottomTabParamList>;
   ServiceDetailsScreen: ServiceCardProps;
   NewServiceScreen: undefined;
+  CategoryServicesScreen: {
+    category: string;
+    name: string;
+  };
 };
 
 export function AppStack() {
@@ -26,6 +30,7 @@ export function AppStack() {
       <Screen name="AppTabNavigator" component={AppTabNavigator} />
       <Screen name="ServiceDetailsScreen" component={ServiceDetailsScreen} />
       <Screen name="NewServiceScreen" component={NewServiceScreen} />
+      <Screen name="CategoryServicesScreen" component={CategoryServicesScreen} />
     </Navigator>
   );
 }
