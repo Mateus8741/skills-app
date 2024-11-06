@@ -1,3 +1,4 @@
+import { requestForegroundPermissionsAsync } from 'expo-location';
 import { PlusCircle } from 'lucide-react-native';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -11,8 +12,12 @@ export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
     navigation.navigate('ServiceDetailsScreen', data);
   }
 
-  function handleAddService() {
-    navigation.navigate('NewServiceScreen');
+  async function handleAddService() {
+    const { granted } = await requestForegroundPermissionsAsync();
+
+    if (granted) {
+      navigation.navigate('NewServiceScreen');
+    }
   }
 
   return (

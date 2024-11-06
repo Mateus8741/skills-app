@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { requestForegroundPermissionsAsync } from 'expo-location';
 import { MapPin } from 'lucide-react-native';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,17 +12,9 @@ import { createServiceSchema, CreateServiceSchema } from '~/schemas';
 export function NewServiceScreen() {
   const { location, mapRef } = useLocationTracking();
 
-  async function watchIsLocationPermitted() {
-    const { granted } = await requestForegroundPermissionsAsync();
-
-    if (granted) {
-      setValue('location.latitude', location.latitude);
-      setValue('location.longitude', location.longitude);
-    }
-  }
-
   useEffect(() => {
-    watchIsLocationPermitted();
+    setValue('location.latitude', location.latitude);
+    setValue('location.longitude', location.longitude);
   }, []);
 
   const { control, handleSubmit, setValue, watch } = useForm<CreateServiceSchema>({
