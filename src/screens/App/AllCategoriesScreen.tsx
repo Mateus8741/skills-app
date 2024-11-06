@@ -20,24 +20,35 @@ export function AllCategoriesScreen({ navigation }: AppScreenProps<'AllCategorie
         data={$DATA}
         keyExtractor={(item) => String(item.id)}
         numColumns={2}
-        contentContainerStyle={{ padding: 16 }}
-        columnWrapperStyle={{ gap: 16 }}
-        ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+        contentContainerStyle={{ padding: 20 }}
+        columnWrapperStyle={{ gap: 20 }}
+        ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
         renderItem={({ item }) => (
-          <Pressable className="flex-1 items-center" onPress={() => handleCategoryPress(item)}>
-            <View className="w-full rounded-2xl bg-white p-4 shadow-sm">
-              <View className="items-center">
-                <Image source={item.image} className="h-24 w-24 rounded-2xl" resizeMode="cover" />
-              </View>
+          <View className="flex-1 items-center">
+            <Pressable
+              className="w-40 flex-1 shadow-sm active:opacity-70"
+              onPress={() => handleCategoryPress(item)}>
+              <View className="overflow-hidden rounded-2xl border border-gray-100 bg-white">
+                <View className="relative">
+                  <Image source={item.image} className="h-32 w-full" resizeMode="cover" />
+                  <View className="absolute inset-0 bg-black/5" />
+                </View>
 
-              <View className="mt-3 items-center">
-                <Text className="text-center text-base font-medium text-gray-800">{item.name}</Text>
-                <Text className="mt-1 text-sm text-gray-500">
-                  {Math.floor(Math.random() * 100) + 50} serviços
-                </Text>
+                <View className="p-4">
+                  <Text className="text-center font-bold text-base text-gray-800" numberOfLines={1}>
+                    {item.name}
+                  </Text>
+
+                  <View className="mt-2 flex-row items-center justify-center gap-2">
+                    <View className="h-2 w-2 rounded-full bg-green-500" />
+                    <Text className="text-sm text-gray-600">
+                      {Math.floor(Math.random() * 100) + 50} serviços
+                    </Text>
+                  </View>
+                </View>
               </View>
-            </View>
-          </Pressable>
+            </Pressable>
+          </View>
         )}
       />
     </Box>
