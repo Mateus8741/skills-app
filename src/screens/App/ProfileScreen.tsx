@@ -5,7 +5,7 @@ import { Box } from '~/components';
 import { useUserStorage } from '~/contexts';
 
 export function ProfileScreen() {
-  const { user } = useUserStorage();
+  const { user, removeUser } = useUserStorage();
 
   const menuItems = [
     {
@@ -26,7 +26,7 @@ export function ProfileScreen() {
     {
       icon: <LogOut size={24} color="#DC2626" />,
       title: 'Sair',
-      //   onPress: signOut,
+      onPress: removeUser,
       danger: true,
     },
   ];
