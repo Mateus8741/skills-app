@@ -23,7 +23,7 @@ export function CategoryServicesScreen({
     <Box>
       <Header title={name} />
 
-      <View className="flex-1 px-4">
+      <View className="flex-1">
         {filteredServices.length > 0 ? (
           <>
             <Text className="mb-4 text-base text-gray-600">
@@ -40,6 +40,7 @@ export function CategoryServicesScreen({
                 <ServiceCard service={item} onPress={() => handleServicePress(item)} />
               )}
               ItemSeparatorComponent={() => <View className="h-4" />}
+              className="px-2"
             />
           </>
         ) : (

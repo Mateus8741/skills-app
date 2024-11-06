@@ -48,9 +48,9 @@ export function MostSearch() {
     <View className="mt-6">
       <View className="mb-4 flex-row items-center justify-between">
         <Text className="font-bold text-2xl text-gray-800">Mais procurados</Text>
-        <Pressable className="px-3 py-1">
+        {/* <Pressable className="px-3 py-1">
           <Text className="font-medium text-green-600">Ver todos</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
 
       <FlatList
