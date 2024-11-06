@@ -37,7 +37,7 @@ export function ProfileScreen() {
       <View className="items-center pb-6 pt-10">
         <View className="relative">
           <Image
-            source={{ uri: 'https://github.com/rodrigorgtic.png' }}
+            source={{ uri: 'https://github.com/Mateus8741.png' }}
             className="h-32 w-32 rounded-full"
           />
           <Pressable
