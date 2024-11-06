@@ -26,7 +26,7 @@ export function AllCategoriesScreen({ navigation }: AppScreenProps<'AllCategorie
         renderItem={({ item }) => (
           <View className="flex-1 items-center">
             <Pressable
-              className="w-40 flex-1 shadow-sm active:opacity-70"
+              className="w-40 flex-1 rounded-2xl bg-white shadow-sm active:opacity-70"
               onPress={() => handleCategoryPress(item)}>
               <View className="overflow-hidden rounded-2xl border border-gray-100 bg-white">
                 <View className="relative">
