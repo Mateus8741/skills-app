@@ -26,4 +26,11 @@ export const mapScreenToProps: Record<
       unfocused: 'home',
     },
   },
+  ProfileScreen: {
+    label: 'Perfil',
+    icon: {
+      focused: 'person',
+      unfocused: 'person',
+    },
+  },
 };
