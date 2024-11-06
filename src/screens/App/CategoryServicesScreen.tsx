@@ -18,6 +18,8 @@ export function CategoryServicesScreen({
     (service) => service.category.toLowerCase() === category.toLowerCase()
   );
 
+  console.log('filteredServices', filteredServices);
+
   function handleServicePress(data: ServiceCardProps) {
     navigation.navigate('ServiceDetailsScreen', data);
   }
