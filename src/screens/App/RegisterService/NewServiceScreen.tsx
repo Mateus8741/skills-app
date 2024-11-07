@@ -5,9 +5,19 @@ import { useForm } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-import { Box, CustomButton, FormTextInput, Header } from '~/components';
+import { Box, CustomButton, FormSelect, FormTextInput, Header } from '~/components';
 import { useLocationTracking } from '~/hooks';
 import { createServiceSchema, CreateServiceSchema } from '~/schemas';
+
+const categoryOptions = [
+  { label: 'Limpeza', value: 'CLEANING' },
+  { label: 'Eletricista', value: 'ELECTRICIAN' },
+  { label: 'Encanador', value: 'PLUMBER' },
+  { label: 'Pintor', value: 'PAINTER' },
+  { label: 'Pedreiro', value: 'BRICKLAYER' },
+  { label: 'Babá', value: 'BABYSITTER' },
+  { label: 'Outros', value: 'OTHERS' },
+];
 
 export function NewServiceScreen() {
   const { location, mapRef } = useLocationTracking();
@@ -22,7 +32,7 @@ export function NewServiceScreen() {
     defaultValues: {
       name: '',
       description: '',
-      category: '',
+      category: 'OTHERS',
       price: 0,
       location: {
         city: '',
@@ -77,12 +87,13 @@ export function NewServiceScreen() {
             />
 
             <View className="flex-row gap-4">
-              <FormTextInput
+              <FormSelect
                 control={control}
                 name="category"
                 label="Categoria"
-                placeholder="Ex: Elétrica"
-                moreClassName="flex-1"
+                placeholder="Selecione uma categoria"
+                options={categoryOptions}
+                // moreClassName="flex-1"
               />
 
               <FormTextInput
