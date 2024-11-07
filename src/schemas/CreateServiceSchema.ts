@@ -1,14 +1,14 @@
 import { z } from 'zod';
 
 export const Category = z
-  .enum(['ELECTRICIAN', 'PAINTER', 'BRICKLAYER', 'GARDENER', 'PLUMBER', 'OTHERS'])
+  .enum(['ELECTRICIAN', 'PAINTER', 'BRICKLAYER', 'BABYSITTER', 'GARDENER', 'PLUMBER', 'OTHERS'])
   .default('OTHERS');
 
 export const createServiceSchema = z.object({
   name: z.string().min(2, 'Nome muito curto').max(50, 'Nome muito longo'),
-  description: z.string().min(2, 'Descrição muito curta').max(50, 'Descrição muito longa'),
+  description: z.string().min(2, 'Descrição muito curta').max(200, 'Descrição muito longa'),
   category: Category,
-  price: z.number().positive(),
+  price: z.string().min(1, 'Preço muito curto').max(50, 'Preço muito longo'),
   location: z.object({
     city: z.string().min(2, 'Nome da cidade muito curto').max(50, 'Nome da cidade muito longo'),
     state: z.string().length(2, 'Estado deve ter 2 caracteres'),
@@ -19,7 +19,7 @@ export const createServiceSchema = z.object({
       .max(50, 'Nome do bairro muito longo'),
     complement: z.string().optional().default(''),
     reference: z.string().optional().default(''),
-    number: z.number().positive().int().optional().default(0),
+    number: z.string().optional().default(''),
     latitude: z.number().default(0),
     longitude: z.number().default(0),
   }),
