@@ -2,6 +2,8 @@ import { ChevronDown } from 'lucide-react-native';
 import { useState } from 'react';
 import { Modal, Pressable, ScrollView, Text, View } from 'react-native';
 
+import { useAppSafeArea } from '~/hooks/useAppSafeArea';
+
 export interface SelectOption {
   label: string;
   value: string;
@@ -27,11 +29,12 @@ export function Select({
   moreClassName,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { bottom } = useAppSafeArea();
 
   const selectedOption = options.find((option) => option.value === value);
 
   return (
-    <View className={`${moreClassName}`}>
+    <View className={`flex-1 ${moreClassName}`}>
       {label && <Text className="mb-2 font-heading text-lg text-black">{label}</Text>}
 
       <Pressable
@@ -49,12 +52,12 @@ export function Select({
       <Modal visible={isOpen} transparent animationType="fade">
         <Pressable className="flex-1 bg-black/20" onPress={() => setIsOpen(false)}>
           <View className="flex-1 justify-end">
-            <View className="rounded-t-2xl bg-white">
+            <View className="rounded-t-2xl bg-white" style={{ paddingBottom: bottom }}>
               <View className="border-b border-gray-200 p-4">
                 <Text className="font-bold text-lg text-gray-800">{label || 'Selecione'}</Text>
               </View>
 
-              <ScrollView className="max-h-80">
+              <ScrollView className="max-h-80" bounces={false} showsVerticalScrollIndicator={false}>
                 {options.map((option) => (
                   <Pressable
                     key={option.value}
