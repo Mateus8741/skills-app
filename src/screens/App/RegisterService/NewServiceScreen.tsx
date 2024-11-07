@@ -93,7 +93,6 @@ export function NewServiceScreen() {
                 label="Categoria"
                 placeholder="Selecione uma categoria"
                 options={categoryOptions}
-                // moreClassName="flex-1"
               />
 
               <FormTextInput

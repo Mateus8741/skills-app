@@ -32,7 +32,7 @@ export function Select({
 
   return (
     <View className={`${moreClassName}`}>
-      {label && <Text className="mb-1 text-sm text-gray-600">{label}</Text>}
+      {label && <Text className="mb-2 font-heading text-lg text-black">{label}</Text>}
 
       <Pressable
         className={`flex-row items-center justify-between rounded-lg border bg-white px-4 py-3.5
