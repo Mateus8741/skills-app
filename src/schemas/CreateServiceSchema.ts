@@ -1,9 +1,13 @@
 import { z } from 'zod';
 
+export const Category = z
+  .enum(['ELECTRICIAN', 'PAINTER', 'BRICKLAYER', 'GARDENER', 'PLUMBER', 'OTHERS'])
+  .default('OTHERS');
+
 export const createServiceSchema = z.object({
   name: z.string().min(2, 'Nome muito curto').max(50, 'Nome muito longo'),
   description: z.string().min(2, 'Descrição muito curta').max(50, 'Descrição muito longa'),
-  category: z.string(),
+  category: Category,
   price: z.number().positive(),
   location: z.object({
     city: z.string().min(2, 'Nome da cidade muito curto').max(50, 'Nome da cidade muito longo'),
