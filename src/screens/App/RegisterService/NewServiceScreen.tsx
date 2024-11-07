@@ -8,10 +8,12 @@ import MapView, { Marker } from 'react-native-maps';
 import { Box, CustomButton, FormSelect, FormTextInput, Header } from '~/components';
 import { useLocationTracking } from '~/hooks';
 import { createServiceSchema, CreateServiceSchema } from '~/schemas';
+import { formatMoney } from '~/utils';
 
 const categoryOptions = [
   { label: 'Limpeza', value: 'CLEANING' },
   { label: 'Eletricista', value: 'ELECTRICIAN' },
+  { label: 'Jardineiro', value: 'GARDENER' },
   { label: 'Encanador', value: 'PLUMBER' },
   { label: 'Pintor', value: 'PAINTER' },
   { label: 'Pedreiro', value: 'BRICKLAYER' },
@@ -33,7 +35,7 @@ export function NewServiceScreen() {
       name: '',
       description: '',
       category: 'OTHERS',
-      price: 0,
+      price: '',
       location: {
         city: '',
         state: '',
@@ -41,7 +43,7 @@ export function NewServiceScreen() {
         neighborhood: '',
         complement: '',
         reference: '',
-        number: 0,
+        number: '',
         latitude: 0,
         longitude: 0,
       },
@@ -59,7 +61,7 @@ export function NewServiceScreen() {
   }
 
   function handleCreateService(data: CreateServiceSchema) {
-    console.log(data);
+    console.log({ ...data, price: formatMoney(Number(data.price)) });
   }
 
   return (
