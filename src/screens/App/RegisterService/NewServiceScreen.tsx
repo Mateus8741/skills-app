@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
+import { useCreateService } from '~/api';
 import { Box, CustomButton, FormSelect, FormTextInput, Header } from '~/components';
 import { useLocationTracking } from '~/hooks';
 import { createServiceSchema, CreateServiceSchema } from '~/schemas';
@@ -23,6 +24,7 @@ const categoryOptions = [
 
 export function NewServiceScreen() {
   const { location, mapRef } = useLocationTracking();
+  const { createService } = useCreateService();
 
   useEffect(() => {
     setValue('location.latitude', location.latitude);
@@ -61,7 +63,7 @@ export function NewServiceScreen() {
   }
 
   function handleCreateService(data: CreateServiceSchema) {
-    console.log({ ...data, price: formatMoney(Number(data.price)) });
+    createService({ ...data, price: formatMoney(Number(data.price)) });
   }
 
   return (

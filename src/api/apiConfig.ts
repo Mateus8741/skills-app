@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { useUserStorage } from '~/contexts';
-import { ChangePasswordScheema, LoginScheema, StepsScheema } from '~/schemas';
+import { ChangePasswordScheema, CreateServiceSchema, LoginScheema, StepsScheema } from '~/schemas';
 
 export const api = axios.create({
   baseURL: 'http://localhost:3100',
@@ -46,4 +46,8 @@ export async function changePassword({ old_password, new_password }: ChangePassw
     old_password,
     new_password,
   });
+}
+
+export async function createService(data: CreateServiceSchema) {
+  return await api.post('/service', data);
 }
