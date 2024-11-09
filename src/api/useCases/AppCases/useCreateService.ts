@@ -20,20 +20,3 @@ export function useCreateService() {
 
   return { createService: mutate, isSuccess, isPending };
 }
-
-// import { useMutation } from '@tanstack/react-query';
-
-// import { createService } from '~/api/apiConfig';
-// import { CreateServiceSchema } from '~/schemas';
-
-// export function useCreateService(onSuccess?: () => void) {
-//   const { mutate, isSuccess, isPending } = useMutation({
-//     mutationFn: (data: CreateServiceSchema) => createService(data),
-//     onSuccess,
-//     onError: (error) => {
-//       console.log('Erro:', error.message);
-//     },
-//   });
-
-//   return { createService: mutate, isSuccess, isPending };
-// }
