@@ -1,6 +1,7 @@
-export function formatMoney(value: number): string {
-  return value.toLocaleString('pt-BR', {
+export function formatMoney(value: number): number {
+  return Number(value.toLocaleString('pt-BR', {
     style: 'currency',
-    currency: 'BRL',
-  });
+      currency: 'BRL',
+    }),
+  );
 }

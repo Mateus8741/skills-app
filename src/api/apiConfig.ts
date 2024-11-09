@@ -1,27 +1,23 @@
 import axios from 'axios';
 
-import { useUserStorage } from '~/contexts';
-import { ChangePasswordScheema, CreateServiceSchema, LoginScheema, StepsScheema } from '~/schemas';
+import { ChangePasswordScheema, LoginScheema, StepsScheema } from '~/schemas';
+import { eventEmitter, EventTypes } from '~/utils/eventEmitter';
 
 export const api = axios.create({
   baseURL: 'http://localhost:3100',
 });
 
 api.interceptors.response.use(
-  (response) => response, // Retorna a resposta normalmente se não houver erro
+  (response) => response,
   (error) => {
-    const { removeUser } = useUserStorage();
-    const originalRequest = error.config;
+    if (error.response?.status === 401 && !error.config._retry) {
+      error.config._retry = true;
 
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      // Desloga o usuário e limpa o estado global
-      removeUser();
+      // Emite o evento de unauthorized
+      eventEmitter.emit(EventTypes.UNAUTHORIZED);
 
       return Promise.reject(error);
     }
-
     return Promise.reject(error);
   }
 );
@@ -48,6 +44,24 @@ export async function changePassword({ old_password, new_password }: ChangePassw
   });
 }
 
-export async function createService(data: CreateServiceSchema) {
+export interface Service {
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  location: {
+    city: string;
+    state: string;
+    street: string;
+    neighborhood: string;
+    complement: string;
+    reference: string;
+    number: number;
+    latitude: number;
+    longitude: number;
+  };
+}
+
+export async function createService(data: Service) {
   return await api.post('/service', data);
 }

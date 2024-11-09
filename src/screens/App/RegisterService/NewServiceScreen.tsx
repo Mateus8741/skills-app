@@ -9,7 +9,6 @@ import { useCreateService } from '~/api';
 import { Box, CustomButton, FormSelect, FormTextInput, Header } from '~/components';
 import { useLocationTracking } from '~/hooks';
 import { createServiceSchema, CreateServiceSchema } from '~/schemas';
-import { formatMoney } from '~/utils';
 
 const categoryOptions = [
   { label: 'Limpeza', value: 'CLEANING' },
@@ -63,7 +62,11 @@ export function NewServiceScreen() {
   }
 
   function handleCreateService(data: CreateServiceSchema) {
-    createService({ ...data, price: formatMoney(Number(data.price)) });
+    createService({
+      ...data,
+      price: Number(data.price),
+      location: { ...data.location, number: Number(data.location.number) },
+    });
   }
 
   return (

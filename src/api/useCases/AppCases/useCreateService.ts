@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { api } from '~/api/apiConfig';
-import { CreateServiceSchema } from '~/schemas';
 
-async function createServiceFn(data: CreateServiceSchema) {
+import { api, Service } from '~/api/apiConfig';
+
+async function createServiceFn(data: Service) {
   const response = await api.post('/service', data);
   return response.data;
 }
