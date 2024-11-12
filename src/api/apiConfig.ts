@@ -1,26 +1,10 @@
 import axios from 'axios';
 
 import { ChangePasswordScheema, LoginScheema, StepsScheema } from '~/schemas';
-import { eventEmitter, EventTypes } from '~/utils/eventEmitter';
 
 export const api = axios.create({
   baseURL: 'http://localhost:3100',
 });
-
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401 && !error.config._retry) {
-      error.config._retry = true;
-
-      // Emite o evento de unauthorized
-      eventEmitter.emit(EventTypes.UNAUTHORIZED);
-
-      return Promise.reject(error);
-    }
-    return Promise.reject(error);
-  }
-);
 
 export function setAuthToken(token: string) {
   api.interceptors.request.use((config) => {

@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Pressable, Text, View } from 'react-native';
 
-import { useLogin } from '~/api';
+import { useAuth } from '~/api';
 import {
   Box,
   CustomButton,
@@ -15,7 +15,7 @@ import { AuthScreenProps } from '~/routes';
 import { LoginScheema, loginScheema } from '~/schemas/LoginSchema';
 
 export function LoginScreen({ navigation }: AuthScreenProps<'LoginScreen'>) {
-  const { isPending, login } = useLogin();
+  const { isPending, login } = useAuth();
 
   const { control, handleSubmit, reset } = useForm<LoginScheema>({
     resolver: zodResolver(loginScheema),
