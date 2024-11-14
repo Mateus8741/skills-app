@@ -1,16 +1,154 @@
-import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios, { AxiosError } from 'axios';
 
 import { ChangePasswordScheema, LoginScheema, StepsScheema } from '~/schemas';
+import { eventEmitter, EventTypes } from '~/utils/eventEmitter';
+
+// Constantes para storage
+const ACCESS_TOKEN_KEY = '@app:accessToken';
+const REFRESH_TOKEN_KEY = '@app:refreshToken';
 
 export const api = axios.create({
   baseURL: 'http://localhost:3100',
 });
 
-export function setAuthToken(token: string) {
-  api.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
+// Interface para resposta do refresh token
+interface RefreshTokenResponse {
+  accessToken: string;
+}
+
+// Função para armazenar tokens
+async function storeTokens(accessToken: string, refreshToken?: string) {
+  try {
+    await AsyncStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    if (refreshToken) {
+      await AsyncStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+    }
+  } catch (error) {
+    console.error('Erro ao armazenar tokens:', error);
+  }
+}
+
+// Função para obter tokens
+async function getStoredTokens() {
+  try {
+    const accessToken = await AsyncStorage.getItem(ACCESS_TOKEN_KEY);
+    const refreshToken = await AsyncStorage.getItem(REFRESH_TOKEN_KEY);
+    return { accessToken, refreshToken };
+  } catch (error) {
+    console.error('Erro ao obter tokens:', error);
+    return { accessToken: null, refreshToken: null };
+  }
+}
+
+// Função para remover tokens
+async function removeTokens() {
+  try {
+    await AsyncStorage.multiRemove([ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY]);
+  } catch (error) {
+    console.error('Erro ao remover tokens:', error);
+  }
+}
+
+// Interceptor para adicionar token em todas as requisições
+api.interceptors.request.use(async (config) => {
+  const { accessToken } = await getStoredTokens();
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+  return config;
+});
+
+// Flag para controlar refresh em andamento
+let isRefreshing = false;
+let failedQueue: {
+  resolve: (token: string) => void;
+  reject: (error: any) => void;
+}[] = [];
+
+// Função para processar fila de requisições
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach((promise) => {
+    if (error) {
+      promise.reject(error);
+    } else {
+      promise.resolve(token!);
+    }
   });
+  failedQueue = [];
+};
+
+// Interceptor para renovar token quando expirar
+api.interceptors.response.use(
+  (response) => response,
+  async (error: AxiosError) => {
+    const originalRequest = error.config;
+
+    if (!originalRequest) {
+      return Promise.reject(error);
+    }
+    // Verifica se é erro de token expirado e não é uma tentativa de refresh
+    if (error.response?.status === 401 && !(originalRequest as any)._retry) {
+      if (isRefreshing) {
+        // Se já está refreshing, adiciona à fila
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return api(originalRequest);
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      }
+
+      (originalRequest as any)._retry = true;
+      isRefreshing = true;
+
+      try {
+        const { refreshToken } = await getStoredTokens();
+
+        if (!refreshToken) {
+          throw new Error('No refresh token available');
+        }
+
+        // Faz a requisição de refresh
+        const response = await api.post<RefreshTokenResponse>('/refresh-token', {
+          refreshToken,
+        });
+
+        const { accessToken } = response.data;
+
+        console.log('mudei o token');
+
+        // Armazena novo access token
+        await storeTokens(accessToken);
+
+        // Atualiza o token no header da requisição original
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+
+        // Processa fila de requisições pendentes
+        processQueue(null, accessToken);
+
+        return api(originalRequest);
+      } catch (refreshError) {
+        processQueue(refreshError, null);
+        await removeTokens();
+        eventEmitter.emit(EventTypes.UNAUTHORIZED);
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+// Função para configurar token inicial
+export function setAuthToken(accessToken: string, refreshToken?: string) {
+  return storeTokens(accessToken, refreshToken);
 }
 
 export async function register(data: StepsScheema) {

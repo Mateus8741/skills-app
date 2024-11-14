@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { api, Service } from '~/api/apiConfig';
 
 async function createServiceFn(data: Service) {
-  const response = await api.post('/service', data);
+  const response = await api.post('/service', [data]);
   return response.data;
 }
 
@@ -15,6 +15,7 @@ export function useCreateService() {
     },
     onError: (error: any) => {
       console.log('Erro ao criar serviço:', error.response?.data || error.message);
+      throw error;
     },
   });
 
