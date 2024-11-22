@@ -14,7 +14,7 @@ export const api = axios.create({
 
 // Interface para resposta do refresh token
 interface RefreshTokenResponse {
-  accessToken: string;
+  token: string;
 }
 
 // Função para armazenar tokens
@@ -53,6 +53,7 @@ async function removeTokens() {
 // Interceptor para adicionar token em todas as requisições
 api.interceptors.request.use(async (config) => {
   const { accessToken } = await getStoredTokens();
+  console.log('Token atual:', accessToken);
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -82,15 +83,18 @@ const processQueue = (error: any, token: string | null = null) => {
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
+    console.log('Interceptor error:', error.response?.status);
+    console.log('Error details:', error.response?.data);
+
     const originalRequest = error.config;
 
     if (!originalRequest) {
       return Promise.reject(error);
     }
+
     // Verifica se é erro de token expirado e não é uma tentativa de refresh
     if (error.response?.status === 401 && !(originalRequest as any)._retry) {
       if (isRefreshing) {
-        // Se já está refreshing, adiciona à fila
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
         })
@@ -98,41 +102,40 @@ api.interceptors.response.use(
             originalRequest.headers.Authorization = `Bearer ${token}`;
             return api(originalRequest);
           })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
+          .catch((err) => Promise.reject(err));
       }
 
       (originalRequest as any)._retry = true;
       isRefreshing = true;
 
       try {
-        const { refreshToken } = await getStoredTokens();
+        // Corrigido para usar a rota correta do backend
+        const response = await api.post<RefreshTokenResponse>(
+          '/refresh', // Alterado para corresponder à rota do backend
+          {},
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
-        if (!refreshToken) {
-          throw new Error('No refresh token available');
-        }
-
-        // Faz a requisição de refresh
-        const response = await api.post<RefreshTokenResponse>('/refresh-token', {
-          refreshToken,
-        });
-
-        const { accessToken } = response.data;
-
-        console.log('mudei o token');
+        const newAccessToken = response.data.token;
+        console.log('Novo token obtido:', newAccessToken);
 
         // Armazena novo access token
-        await storeTokens(accessToken);
+        await storeTokens(newAccessToken);
 
         // Atualiza o token no header da requisição original
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
         // Processa fila de requisições pendentes
-        processQueue(null, accessToken);
+        processQueue(null, newAccessToken);
 
         return api(originalRequest);
-      } catch (refreshError) {
+      } catch (refreshError: any) {
+        console.error('Erro no refresh token:', refreshError.response?.data || refreshError);
         processQueue(refreshError, null);
         await removeTokens();
         eventEmitter.emit(EventTypes.UNAUTHORIZED);
@@ -142,9 +145,13 @@ api.interceptors.response.use(
       }
     }
 
+    // Se não for erro de autenticação, rejeita normalmente
     return Promise.reject(error);
   }
 );
+
+// Atualiza a configuração inicial do axios para suportar cookies
+api.defaults.withCredentials = true;
 
 // Função para configurar token inicial
 export function setAuthToken(accessToken: string, refreshToken?: string) {
@@ -156,7 +163,16 @@ export async function register(data: StepsScheema) {
 }
 
 export async function login(data: LoginScheema) {
-  return await api.post('/login', data);
+  const response = await api.post('/login', data, {
+    withCredentials: true,
+  });
+
+  if (response.data.accessToken) {
+    await storeTokens(response.data.accessToken);
+    api.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+  }
+
+  return response;
 }
 
 export async function changePassword({ old_password, new_password }: ChangePasswordScheema) {
@@ -185,5 +201,5 @@ export interface Service {
 }
 
 export async function createService(data: Service) {
-  return await api.post('/service', data);
+  return await api.post('/service', [data]);
 }
