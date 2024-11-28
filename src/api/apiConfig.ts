@@ -203,3 +203,7 @@ export interface Service {
 export async function createService(data: Service) {
   return await api.post('/service', [data]);
 }
+
+export async function getServices() {
+  return await api.get('/service');
+}
