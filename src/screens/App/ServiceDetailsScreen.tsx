@@ -3,7 +3,7 @@ import { ImageBackground, ScrollView, Text, View } from 'react-native';
 
 import { ContactDetails, CustomButton, Header, LocationDetails } from '~/components';
 import { AppScreenProps } from '~/routes';
-import { calculateInterval, mapImageDetails } from '~/utils';
+import { calculateInterval, formatMoney, mapImageDetails } from '~/utils';
 
 export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsScreen'>) {
   const details = route.params;
@@ -12,6 +12,8 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
     mapImageDetails[details.category as keyof typeof mapImageDetails] || mapImageDetails.OTHERS;
 
   const interval = calculateInterval(new Date(details.createdAt), new Date());
+
+  const formatedMoney = formatMoney(details.price);
 
   return (
     <View className="flex-1 bg-white">
@@ -29,7 +31,7 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
             <View className="flex-row items-center justify-between">
               <Text className="font-bold text-2xl text-gray-800">{details.name}</Text>
               <View className="rounded-full bg-green-100 px-3 py-1">
-                <Text className="font-medium text-green-700">{details.price}</Text>
+                <Text className="font-medium text-green-700">{formatedMoney}</Text>
               </View>
             </View>
 
