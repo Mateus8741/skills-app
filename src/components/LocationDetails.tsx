@@ -26,15 +26,15 @@ export function LocationDetails(location: ServiceLocation) {
         </View>
 
         {location.complement && (
-          <View className="flex-row gap-3">
-            <Building2 size={20} color="#6b7280" className="mt-1" />
+          <View className="flex-row items-center gap-3">
+            <Building2 size={20} color="#6b7280" />
             <Text className="flex-1 text-gray-700">{location.complement}</Text>
           </View>
         )}
 
         {location.reference && (
-          <View className="flex-row gap-3">
-            <Info size={20} color="#6b7280" className="mt-1" />
+          <View className="flex-row items-center gap-3">
+            <Info size={20} color="#6b7280" />
             <Text className="flex-1 text-gray-700">{location.reference}</Text>
           </View>
         )}
