@@ -99,7 +99,9 @@ api.interceptors.response.use(
           failedQueue.push({ resolve, reject });
         })
           .then((token) => {
-            originalRequest.headers.Authorization = `Bearer ${token}`;
+            // originalRequest.headers.Authorization = `Bearer ${token}`;
+            // return api(originalRequest);
+            originalRequest.headers['Authorization'] = `Bearer ${token}`;
             return api(originalRequest);
           })
           .catch((err) => Promise.reject(err));
@@ -128,7 +130,13 @@ api.interceptors.response.use(
         await storeTokens(newAccessToken);
 
         // Atualiza o token no header da requisição original
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        // originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        if (originalRequest.data) {
+          originalRequest.data = JSON.parse(originalRequest.data);
+        }
+
+        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+        api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
 
         // Processa fila de requisições pendentes
         processQueue(null, newAccessToken);

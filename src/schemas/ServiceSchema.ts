@@ -17,7 +17,7 @@ export interface ServiceLocation {
 export interface ServiceCardProps {
   name: string;
   description: string;
-  price: string;
+  price: number;
   category: ServiceCategory;
   userPhoneNumber: string;
   rating: number;

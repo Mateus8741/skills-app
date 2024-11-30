@@ -4,4 +4,4 @@ export const eventEmitter = new EventEmitter();
 
 export const EventTypes = {
   UNAUTHORIZED: 'UNAUTHORIZED',
-} as const; 
+} as const;
