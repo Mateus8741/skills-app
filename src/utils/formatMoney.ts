@@ -1,6 +1,6 @@
-export function formatMoney(value: number): string {
-  return value.toLocaleString('pt-BR', {
+export function formatMoney(value: number) {
+  return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
-  });
+  }).format(value);
 }
