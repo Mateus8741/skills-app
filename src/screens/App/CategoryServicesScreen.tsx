@@ -4,8 +4,8 @@ import { FlatList } from 'react-native-gesture-handler';
 import { $SERVICES } from './HomeScreen';
 
 import { Box, Header, ServiceCard } from '~/components';
+import { ServiceCardProps } from '~/models';
 import { AppScreenProps } from '~/routes';
-import { ServiceCardProps } from '~/schemas';
 
 export function CategoryServicesScreen({
   navigation,
