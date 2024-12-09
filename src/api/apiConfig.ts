@@ -215,3 +215,11 @@ export async function createService(data: Service) {
 export async function getServices() {
   return await api.get('/service');
 }
+
+export async function applicationStatus(id: string, status: 'ACCEPTED' | 'REJECTED') {
+  return await api.patch(`/application/${id}/status`, { status });
+}
+
+export async function getApplications(id: string) {
+  return await api.get(`/service${id}/applications`);
+}

@@ -5,8 +5,8 @@ import { FlatList } from 'react-native-gesture-handler';
 
 import { useGetServices } from '~/api/useCases/AppCases/useGetServices';
 import { AllSearch, Box, HeaderHome, MostSearch, ServiceCard } from '~/components';
+import { ServiceCardProps } from '~/models';
 import { AppTabScreenProps } from '~/routes';
-import { ServiceCardProps } from '~/schemas';
 
 export function HomeScreen({ navigation }: AppTabScreenProps<'HomeScreen'>) {
   const { data } = useGetServices();

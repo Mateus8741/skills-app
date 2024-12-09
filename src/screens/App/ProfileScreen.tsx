@@ -1,10 +1,11 @@
-import { Camera, LogOut, MapPin, Settings, User2 } from 'lucide-react-native';
+import { BriefcaseBusiness, Camera, LogOut, MapPin, Settings, User2 } from 'lucide-react-native';
 import { Image, Pressable, Text, View } from 'react-native';
 
 import { Box } from '~/components';
 import { useUserStorage } from '~/contexts';
+import { AppTabScreenProps } from '~/routes';
 
-export function ProfileScreen() {
+export function ProfileScreen({ navigation }: AppTabScreenProps<'ProfileScreen'>) {
   const { user, removeUser } = useUserStorage();
 
   const menuItems = [
@@ -17,6 +18,11 @@ export function ProfileScreen() {
       icon: <MapPin size={24} color="#374151" />,
       title: 'Endereços',
       onPress: () => console.log('Endereços'),
+    },
+    {
+      icon: <BriefcaseBusiness size={24} color="#374151" />,
+      title: 'Minhas Publicações',
+      onPress: () => navigation.navigate('UserServicesScreen'),
     },
     {
       icon: <Settings size={24} color="#374151" />,

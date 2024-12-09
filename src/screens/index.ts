@@ -4,6 +4,7 @@ export * from './App/HomeScreen';
 export * from './App/ProfileScreen';
 export * from './App/RegisterService/NewServiceScreen';
 export * from './App/ServiceDetailsScreen';
+export * from './App/UserServicesScreen';
 export * from './Auth/ForgotPasswordScreen';
 export * from './Auth/LoginScreen';
 export * from './Auth/OnboardScreen';
