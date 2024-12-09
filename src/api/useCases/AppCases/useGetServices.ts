@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { api } from '~/api/apiConfig';
-import { ServiceCardProps } from '~/schemas';
+import { ServiceCardProps } from '~/models';
 
 export function useGetServices() {
   return useQuery({
