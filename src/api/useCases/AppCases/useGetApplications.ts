@@ -1,10 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getApplications } from '~/api/apiConfig';
+import { api } from '~/api/apiConfig';
 
-export function useGetApplications(id: string) {
+export function useGetApplications() {
   return useQuery({
-    queryKey: ['applications', id],
-    queryFn: () => getApplications(id),
+    queryKey: ['applications'],
+    queryFn: async () => {
+      const response = await api.get('/applications');
+      return response.data;
+    },
+    staleTime: 1000 * 60,
   });
 }

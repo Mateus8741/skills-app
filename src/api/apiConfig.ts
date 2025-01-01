@@ -220,6 +220,6 @@ export async function applicationStatus(id: string, status: 'ACCEPTED' | 'REJECT
   return await api.patch(`/application/${id}/status`, { status });
 }
 
-export async function getApplications(id: string) {
-  return await api.get(`/service${id}/applications`);
+export async function getApplications() {
+  return await api.get('/applications');
 }
