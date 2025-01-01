@@ -1,7 +1,7 @@
 import { Star, Timer } from 'lucide-react-native';
 import { ImageBackground, ScrollView, Text, View } from 'react-native';
-import { useApplicationStatus } from '~/api/useCases/AppCases/useApplicationStatus';
 
+import { useApplicationStatus } from '~/api/useCases/AppCases/useApplicationStatus';
 import { ContactDetails, Header, LocationDetails } from '~/components';
 import { useUserStorage } from '~/contexts';
 import { AppScreenProps } from '~/routes';

@@ -1,15 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { api, Service } from '~/api/apiConfig';
-
-async function createServiceFn(data: Service) {
-  const response = await api.post('/service', [data]);
-  return response.data;
-}
+import { createService } from '~/api/apiConfig';
 
 export function useCreateService() {
   const { mutate, isSuccess, isPending } = useMutation({
-    mutationFn: createServiceFn,
+    mutationFn: createService,
     onSuccess: (data) => {
       console.log('Serviço criado:', data);
     },

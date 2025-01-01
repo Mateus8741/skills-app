@@ -223,3 +223,7 @@ export async function applicationStatus(id: string, status: 'ACCEPTED' | 'REJECT
 export async function getApplications() {
   return await api.get('/applications');
 }
+
+export async function getUserServices() {
+  return await api.get('/service/user');
+}
