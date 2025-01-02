@@ -1,5 +1,4 @@
 import { FlatList, View } from 'react-native';
-import { Shadow } from 'react-native-shadow-2';
 
 import { useGetServices } from '~/api/useCases/AppCases/useGetServices';
 import { Box, CategoryCard, Header } from '~/components';
@@ -18,7 +17,7 @@ const CATEGORIES = [
 export function AllCategoriesScreen({ navigation }: AppScreenProps<'AllCategoriesScreen'>) {
   const { data: services } = useGetServices();
 
-  function handleCategoryPress(data: typeof CATEGORIES[0]) {
+  function handleCategoryPress(data: (typeof CATEGORIES)[0]) {
     navigation.navigate('CategoryServicesScreen', {
       category: data.category,
       name: data.name,
@@ -37,14 +36,12 @@ export function AllCategoriesScreen({ navigation }: AppScreenProps<'AllCategorie
         columnWrapperStyle={{ gap: 20 }}
         ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
         renderItem={({ item }) => (
-          <Shadow distance={4} startColor="rgba(0, 0, 0, 0.02)">
-            <CategoryCard
-              name={item.name}
-              image={mapImageDetails[item.category] || mapImageDetails.OTHERS}
-              servicesCount={services?.filter((service) => service.category === item.category).length}
-              onPress={() => handleCategoryPress(item)}
-            />
-          </Shadow>
+          <CategoryCard
+            name={item.name}
+            image={mapImageDetails[item.category] || mapImageDetails.OTHERS}
+            servicesCount={services?.filter((service) => service.category === item.category).length}
+            onPress={() => handleCategoryPress(item)}
+          />
         )}
       />
     </Box>

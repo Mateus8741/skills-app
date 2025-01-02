@@ -9,7 +9,7 @@ interface CategoryCardProps extends PressableProps {
 export function CategoryCard({ name, image, servicesCount, ...rest }: CategoryCardProps) {
   return (
     <View className="flex-1 items-center">
-      <Pressable className="w-40 flex-1 rounded-2xl bg-white shadow-sm active:opacity-70" {...rest}>
+      <Pressable className="w-40 rounded-2xl bg-white shadow-sm active:opacity-70" {...rest}>
         <View className="overflow-hidden rounded-2xl border border-gray-100 bg-white">
           <View className="relative">
             <Image source={image} className="h-32 w-full" resizeMode="cover" />
