@@ -1,8 +1,8 @@
+import React from 'react';
 import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import { $SERVICES } from './HomeScreen';
-
+import { useGetServices } from '~/api/useCases/AppCases/useGetServices';
 import { Box, Header, ServiceCard } from '~/components';
 import { ServiceCardProps } from '~/models';
 import { AppScreenProps } from '~/routes';
@@ -12,8 +12,9 @@ export function CategoryServicesScreen({
   route,
 }: AppScreenProps<'CategoryServicesScreen'>) {
   const { category, name } = route.params;
+  const { data: services } = useGetServices();
 
-  const filteredServices = $SERVICES.filter((service) => service.category === category);
+  const filteredServices = services?.filter((service) => service.category === category) || [];
 
   function handleServicePress(data: ServiceCardProps) {
     navigation.navigate('ServiceDetailsScreen', data);
@@ -33,7 +34,7 @@ export function CategoryServicesScreen({
 
             <FlatList
               data={filteredServices}
-              keyExtractor={(_, index) => String(index)}
+              keyExtractor={(item) => item.name}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{ paddingBottom: 20 }}
               renderItem={({ item }) => (
