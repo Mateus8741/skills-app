@@ -4,9 +4,9 @@ import { FlatList, Text } from 'react-native';
 import { useGetApplications } from '~/api';
 import { Box, ServiceCard } from '~/components';
 import { ServiceCardProps } from '~/models';
-import { AppTabScreenProps } from '~/routes';
+import { AppScreenProps } from '~/routes';
 
-export function UserServicesScreen({ navigation }: AppTabScreenProps<'ProfileScreen'>) {
+export function UserServicesScreen({ navigation }: AppScreenProps<'UserServicesScreen'>) {
   const { data: applications, isLoading } = useGetApplications();
 
   function handleServicePress(service: ServiceCardProps) {
