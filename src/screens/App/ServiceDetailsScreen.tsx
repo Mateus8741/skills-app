@@ -2,12 +2,10 @@ import { Star, Timer } from 'lucide-react-native';
 import { ImageBackground, ScrollView, Text, View } from 'react-native';
 
 import { ContactDetails, Header, LocationDetails } from '~/components';
-import { useUserStorage } from '~/contexts';
 import { AppScreenProps } from '~/routes';
 import { calculateInterval, formatMoney, mapImageDetails } from '~/utils';
 
 export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsScreen'>) {
-  const { user } = useUserStorage();
   const details = route.params;
 
   const backgroundImage =
