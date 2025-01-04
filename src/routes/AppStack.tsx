@@ -4,9 +4,14 @@ import React from 'react';
 
 import { AppTabBottomTabParamList, AppTabNavigator } from './BottomTabsNavigation/AppTabNavigator';
 
-
 import { ServiceCardProps } from '~/models';
-import { AllCategoriesScreen, CategoryServicesScreen, NewServiceScreen, ServiceDetailsScreen, UserServicesScreen } from '~/screens';
+import {
+  AllCategoriesScreen,
+  CategoryServicesScreen,
+  NewServiceScreen,
+  ServiceDetailsScreen,
+  UserServicesScreen,
+} from '~/screens';
 
 export type AppStackParamList = {
   AppTabNavigator: NavigatorScreenParams<AppTabBottomTabParamList>;

@@ -15,6 +15,7 @@ export interface ServiceLocation {
 }
 
 export interface ServiceCardProps {
+  id: string;
   name: string;
   description: string;
   price: number;

@@ -1,12 +1,14 @@
 import { Star, Timer } from 'lucide-react-native';
 import { ImageBackground, ScrollView, Text, View } from 'react-native';
 
-import { ContactDetails, Header, LocationDetails } from '~/components';
+import { useCreateApplication } from '~/api/useCases/AppCases/useCreateApplication';
+import { ContactDetails, CustomButton, Header, LocationDetails } from '~/components';
 import { AppScreenProps } from '~/routes';
 import { calculateInterval, formatMoney, mapImageDetails } from '~/utils';
 
 export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsScreen'>) {
   const details = route.params;
+  const { mutateAsync: createApplication, isPending } = useCreateApplication();
 
   const backgroundImage =
     mapImageDetails[details.category as keyof typeof mapImageDetails] || mapImageDetails.OTHERS;
@@ -14,6 +16,14 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
   const interval = calculateInterval(new Date(details.createdAt), new Date());
 
   const formatedMoney = formatMoney(details.price);
+
+  async function handleApply() {
+    try {
+      await createApplication({ serviceId: details.id });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <View className="flex-1 bg-white">
@@ -60,6 +70,13 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
           <View className="mb-6 mt-4 rounded-2xl bg-gray-50 p-4">
             <ContactDetails location={details.location} userPhoneNumber={details.userPhoneNumber} />
           </View>
+
+          <CustomButton
+            title="Candidatar-se"
+            variant="secondary"
+            isLoading={isPending}
+            onPress={handleApply}
+          />
         </ScrollView>
       </View>
     </View>
