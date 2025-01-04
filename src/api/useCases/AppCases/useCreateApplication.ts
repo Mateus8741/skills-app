@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+
 import { api } from '~/api';
 
 interface CreateApplicationDTO {
@@ -12,4 +13,4 @@ export function useCreateApplication() {
       return response.data;
     },
   });
-} 
+}
