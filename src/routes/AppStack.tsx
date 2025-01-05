@@ -6,6 +6,7 @@ import { AppTabBottomTabParamList, AppTabNavigator } from './BottomTabsNavigatio
 
 import { ServiceCardProps } from '~/models';
 import {
+  AddressScreen,
   AllCategoriesScreen,
   CategoryServicesScreen,
   NewServiceScreen,
@@ -25,6 +26,7 @@ export type AppStackParamList = {
   AllCategoriesScreen: undefined;
   UserServicesScreen: undefined;
   PersonalInfoScreen: undefined;
+  AddressScreen: undefined;
 };
 
 export function AppStack() {
@@ -44,6 +46,7 @@ export function AppStack() {
       <Screen name="AllCategoriesScreen" component={AllCategoriesScreen} />
       <Screen name="UserServicesScreen" component={UserServicesScreen} />
       <Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
+      <Screen name="AddressScreen" component={AddressScreen} />
     </Navigator>
   );
 }

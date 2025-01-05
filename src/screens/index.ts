@@ -1,6 +1,7 @@
 export * from './App/AllCategoriesScreen';
 export * from './App/CategoryServicesScreen';
 export * from './App/HomeScreen';
+export * from './App/Profile/AddressScreen';
 export * from './App/Profile/PersonalInfoScreen';
 export * from './App/Profile/ProfileScreen';
 export * from './App/RegisterService/NewServiceScreen';

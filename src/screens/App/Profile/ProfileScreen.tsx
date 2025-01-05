@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Camera, LogOut, MapPin, Settings, User2 } from 'lucide-react-native';
+import { BriefcaseBusiness, Camera, LogOut, Settings, User2 } from 'lucide-react-native';
 import { Image, Pressable, Text, View } from 'react-native';
 
 import { Box } from '~/components';
@@ -14,11 +14,11 @@ export function ProfileScreen({ navigation }: AppTabScreenProps<'ProfileScreen'>
       title: 'Informações pessoais',
       onPress: () => navigation.navigate('PersonalInfoScreen'),
     },
-    {
-      icon: <MapPin size={24} color="#374151" />,
-      title: 'Endereços',
-      onPress: () => console.log('Endereços'),
-    },
+    // {
+    //   icon: <MapPin size={24} color="#374151" />,
+    //   title: 'Endereços',
+    //   onPress: () => navigation.navigate('AddressScreen'),
+    // },
     {
       icon: <BriefcaseBusiness size={24} color="#374151" />,
       title: 'Minhas Publicações',
