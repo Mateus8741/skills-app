@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { z } from 'zod';
 
+import { useUpdateUser } from '~/api';
 import { Box, CustomButton, FormTextInput, Header } from '~/components';
 import { useUserStorage } from '~/contexts';
 import { AppScreenProps } from '~/routes';
@@ -17,7 +18,8 @@ const personalInfoSchema = z.object({
 type PersonalInfoData = z.infer<typeof personalInfoSchema>;
 
 export function PersonalInfoScreen({ navigation }: AppScreenProps<'PersonalInfoScreen'>) {
-  const { user, updateUser } = useUserStorage();
+  const { user } = useUserStorage();
+  const { updateUser, isPending } = useUpdateUser();
 
   const { control, handleSubmit } = useForm<PersonalInfoData>({
     resolver: zodResolver(personalInfoSchema),
@@ -31,9 +33,6 @@ export function PersonalInfoScreen({ navigation }: AppScreenProps<'PersonalInfoS
 
   async function handleUpdateInfo(data: PersonalInfoData) {
     try {
-      // Aqui você implementará a chamada para atualizar os dados
-      // await api.put('/users/profile', data);
-      
       updateUser({
         ...user!,
         user: {
@@ -88,9 +87,10 @@ export function PersonalInfoScreen({ navigation }: AppScreenProps<'PersonalInfoS
         <CustomButton
           title="Salvar alterações"
           variant="secondary"
+          isLoading={isPending}
           onPress={handleSubmit(handleUpdateInfo)}
         />
       </View>
     </Box>
   );
-} 
+}
