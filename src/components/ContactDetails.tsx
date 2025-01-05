@@ -1,7 +1,7 @@
 import { AlertTriangle, Map, MessageCircle, Phone } from 'lucide-react-native';
 import { Alert, Linking, Platform, Pressable, Text, View } from 'react-native';
 
-import { ServiceCardProps } from '~/schemas';
+import { ServiceCardProps } from '~/models';
 
 interface ContactDetailsProps {
   location: ServiceCardProps['location'];
@@ -62,16 +62,15 @@ export function ContactDetails({ location, userPhoneNumber }: ContactDetailsProp
 
   return (
     <View>
-      <View className="flex-row items-center gap-2 mb-4">
+      <View className="mb-4 flex-row items-center gap-2">
         <Phone size={20} color="#16a34a" />
         <Text className="font-bold text-lg text-gray-800">Contato</Text>
       </View>
 
       <View className="flex-row flex-wrap justify-between gap-y-4">
-        <Pressable 
-          className="w-[48%] bg-white rounded-xl p-4 border border-gray-100 active:opacity-70"
-          onPress={() => handlePress('call')}
-        >
+        <Pressable
+          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
+          onPress={() => handlePress('call')}>
           <View className="items-center gap-3">
             <View className="rounded-full bg-green-100 p-3">
               <Phone size={24} color="#16a34a" />
@@ -83,10 +82,9 @@ export function ContactDetails({ location, userPhoneNumber }: ContactDetailsProp
           </View>
         </Pressable>
 
-        <Pressable 
-          className="w-[48%] bg-white rounded-xl p-4 border border-gray-100 active:opacity-70"
-          onPress={() => handlePress('message')}
-        >
+        <Pressable
+          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
+          onPress={() => handlePress('message')}>
           <View className="items-center gap-3">
             <View className="rounded-full bg-green-100 p-3">
               <MessageCircle size={24} color="#16a34a" />
@@ -98,10 +96,9 @@ export function ContactDetails({ location, userPhoneNumber }: ContactDetailsProp
           </View>
         </Pressable>
 
-        <Pressable 
-          className="w-[48%] bg-white rounded-xl p-4 border border-gray-100 active:opacity-70"
-          onPress={() => handlePress('map')}
-        >
+        <Pressable
+          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
+          onPress={() => handlePress('map')}>
           <View className="items-center gap-3">
             <View className="rounded-full bg-green-100 p-3">
               <Map size={24} color="#16a34a" />
@@ -113,10 +110,9 @@ export function ContactDetails({ location, userPhoneNumber }: ContactDetailsProp
           </View>
         </Pressable>
 
-        <Pressable 
-          className="w-[48%] bg-white rounded-xl p-4 border border-gray-100 active:opacity-70"
-          onPress={() => Alert.alert('Reportar', 'Deseja reportar este serviço?')}
-        >
+        <Pressable
+          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
+          onPress={() => Alert.alert('Reportar', 'Deseja reportar este serviço?')}>
           <View className="items-center gap-3">
             <View className="rounded-full bg-red-100 p-3">
               <AlertTriangle size={24} color="#dc2626" />
