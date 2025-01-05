@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 
-import { api } from '~/api';
+import { api } from '~/api/apiConfig';
 import { UserSchema } from '~/models';
 
 export function useUpdateUser(onSuccess?: () => void) {

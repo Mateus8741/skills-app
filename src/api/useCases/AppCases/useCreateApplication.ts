@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { api } from '~/api';
+import { api } from '~/api/apiConfig';
 
 interface CreateApplicationDTO {
   serviceId: string;
