@@ -1,6 +1,14 @@
 import { Alert, Linking, Platform } from 'react-native';
+import { z } from 'zod';
 
+import { api } from '~/api';
 import { ServiceCardProps } from '~/models';
+
+const reportSchema = z.object({
+  serviceId: z.string(),
+  reason: z.string().min(10, 'A razão deve ter pelo menos 10 caracteres'),
+  description: z.string().min(20, 'A descrição deve ter pelo menos 20 caracteres'),
+});
 
 interface UseContactActionsProps {
   location: ServiceCardProps['location'];
@@ -51,6 +59,49 @@ export function useContactActions({ location, userPhoneNumber }: UseContactActio
         }
 
         Linking.openURL(url);
+        break;
+      }
+      case 'report': {
+        Alert.prompt(
+          'Reportar Problema',
+          'Qual o motivo da denúncia?',
+          async (reason) => {
+            if (!reason || reason.length < 10) {
+              return Alert.alert('Erro', 'A razão da denúncia deve ter pelo menos 10 caracteres');
+            }
+
+            Alert.prompt(
+              'Descrição',
+              'Descreva o problema em detalhes',
+              async (description) => {
+                if (!description || description.length < 20) {
+                  return Alert.alert('Erro', 'A descrição deve ter pelo menos 20 caracteres');
+                }
+
+                try {
+                  const data = reportSchema.parse({
+                    serviceId: location.serviceId,
+                    reason,
+                    description,
+                  });
+
+                  await api.post('/services/report', data);
+
+                  Alert.alert(
+                    'Sucesso',
+                    'Sua denúncia foi enviada e será analisada pela nossa equipe'
+                  );
+                } catch {
+                  Alert.alert('Erro', 'Não foi possível enviar a denúncia. Tente novamente.');
+                }
+              },
+              'plain-text',
+              ''
+            );
+          },
+          'plain-text',
+          ''
+        );
         break;
       }
 
