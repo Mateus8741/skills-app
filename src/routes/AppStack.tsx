@@ -9,6 +9,7 @@ import {
   AllCategoriesScreen,
   CategoryServicesScreen,
   NewServiceScreen,
+  PersonalInfoScreen,
   ServiceDetailsScreen,
   UserServicesScreen,
 } from '~/screens';
