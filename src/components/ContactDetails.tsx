@@ -1,5 +1,7 @@
 import { AlertTriangle, Map, MessageCircle, Phone } from 'lucide-react-native';
-import { Alert, Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+
+import { ContactActionButton } from './ContactActionButton';
 
 import { useContactActions } from '~/hooks/useContactActions';
 import { ServiceCardProps } from '~/models';
@@ -20,61 +22,34 @@ export function ContactDetails({ location, userPhoneNumber }: ContactDetailsProp
       </View>
 
       <View className="flex-row flex-wrap justify-between gap-y-4">
-        <Pressable
-          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
-          onPress={() => handlePress('call')}>
-          <View className="items-center gap-3">
-            <View className="rounded-full bg-green-100 p-3">
-              <Phone size={24} color="#16a34a" />
-            </View>
-            <View className="items-center">
-              <Text className="font-bold text-gray-800">Ligar</Text>
-              <Text className="text-xs text-gray-500">Chamada direta</Text>
-            </View>
-          </View>
-        </Pressable>
+        <ContactActionButton
+          icon={Phone}
+          title="Ligar"
+          subtitle="Chamada direta"
+          onPress={() => handlePress('call')}
+        />
 
-        <Pressable
-          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
-          onPress={() => handlePress('message')}>
-          <View className="items-center gap-3">
-            <View className="rounded-full bg-green-100 p-3">
-              <MessageCircle size={24} color="#16a34a" />
-            </View>
-            <View className="items-center">
-              <Text className="font-bold text-gray-800">Mensagem</Text>
-              <Text className="text-xs text-gray-500">Enviar SMS</Text>
-            </View>
-          </View>
-        </Pressable>
+        <ContactActionButton
+          icon={MessageCircle}
+          title="Mensagem"
+          subtitle="Enviar SMS"
+          onPress={() => handlePress('message')}
+        />
 
-        <Pressable
-          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
-          onPress={() => handlePress('map')}>
-          <View className="items-center gap-3">
-            <View className="rounded-full bg-green-100 p-3">
-              <Map size={24} color="#16a34a" />
-            </View>
-            <View className="items-center">
-              <Text className="font-bold text-gray-800">Mapa</Text>
-              <Text className="text-xs text-gray-500">Ver localização</Text>
-            </View>
-          </View>
-        </Pressable>
+        <ContactActionButton
+          icon={Map}
+          title="Mapa"
+          subtitle="Ver localização"
+          onPress={() => handlePress('map')}
+        />
 
-        <Pressable
-          className="w-[48%] rounded-xl border border-gray-100 bg-white p-4 active:opacity-70"
-          onPress={() => Alert.alert('Reportar', 'Deseja reportar este serviço?')}>
-          <View className="items-center gap-3">
-            <View className="rounded-full bg-red-100 p-3">
-              <AlertTriangle size={24} color="#dc2626" />
-            </View>
-            <View className="items-center">
-              <Text className="font-bold text-gray-800">Reportar</Text>
-              <Text className="text-xs text-gray-500">Informar problema</Text>
-            </View>
-          </View>
-        </Pressable>
+        <ContactActionButton
+          icon={AlertTriangle}
+          title="Reportar"
+          subtitle="Informar problema"
+          variant="danger"
+          onPress={() => handlePress('report')}
+        />
       </View>
     </View>
   );

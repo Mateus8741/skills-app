@@ -2,6 +2,7 @@ export * from './AllSearch';
 export * from './Box';
 export * from './CategoryCard';
 export * from './CheckForm';
+export * from './ContactActionButton';
 export * from './ContactDetails';
 export * from './CustomButton';
 export * from './CustomIcons';
@@ -19,4 +20,3 @@ export * from './PasswordInput';
 export * from './Select';
 export * from './ServiceCard';
 export * from './TextInput';
-
