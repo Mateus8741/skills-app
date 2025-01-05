@@ -1,5 +1,6 @@
 import { Star, Timer } from 'lucide-react-native';
 import { ImageBackground, ScrollView, Text, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import { useCreateApplication } from '~/api/useCases/AppCases/useCreateApplication';
 import { ContactDetails, CustomButton, Header, LocationDetails } from '~/components';
@@ -20,8 +21,21 @@ export function ServiceDetailsScreen({ route }: AppScreenProps<'ServiceDetailsSc
   async function handleApply() {
     try {
       await createApplication({ serviceId: details.id });
-    } catch (error) {
-      console.error(error);
+      Toast.show({
+        type: 'success',
+        text1: 'Candidatura enviada!',
+        text2: 'O prestador de serviço entrará em contato.',
+        visibilityTime: 4000,
+        position: 'top',
+      });
+    } catch {
+      Toast.show({
+        type: 'error',
+        text1: 'Erro ao enviar candidatura',
+        text2: 'Tente novamente mais tarde.',
+        visibilityTime: 4000,
+        position: 'top',
+      });
     }
   }
 
