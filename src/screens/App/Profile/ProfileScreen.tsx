@@ -27,7 +27,7 @@ export function ProfileScreen({ navigation }: AppTabScreenProps<'ProfileScreen'>
     {
       icon: <Settings size={24} color="#374151" />,
       title: 'Configurações',
-      onPress: () => console.log('Configurações'),
+      onPress: () => navigation.navigate('SettingsScreen'),
     },
     {
       icon: <LogOut size={24} color="#DC2626" />,

@@ -4,6 +4,7 @@ export * from './App/HomeScreen';
 export * from './App/Profile/AddressScreen';
 export * from './App/Profile/PersonalInfoScreen';
 export * from './App/Profile/ProfileScreen';
+export * from './App/Profile/SettingsScreen';
 export * from './App/RegisterService/NewServiceScreen';
 export * from './App/ServiceDetailsScreen';
 export * from './App/UserServicesScreen';

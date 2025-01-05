@@ -12,6 +12,7 @@ import {
   NewServiceScreen,
   PersonalInfoScreen,
   ServiceDetailsScreen,
+  SettingsScreen,
   UserServicesScreen,
 } from '~/screens';
 
@@ -27,6 +28,7 @@ export type AppStackParamList = {
   UserServicesScreen: undefined;
   PersonalInfoScreen: undefined;
   AddressScreen: undefined;
+  SettingsScreen: undefined;
 };
 
 export function AppStack() {
@@ -47,6 +49,7 @@ export function AppStack() {
       <Screen name="UserServicesScreen" component={UserServicesScreen} />
       <Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
       <Screen name="AddressScreen" component={AddressScreen} />
+      <Screen name="SettingsScreen" component={SettingsScreen} />
     </Navigator>
   );
 }
