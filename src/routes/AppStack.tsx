@@ -23,6 +23,7 @@ export type AppStackParamList = {
   };
   AllCategoriesScreen: undefined;
   UserServicesScreen: undefined;
+  PersonalInfoScreen: undefined;
 };
 
 export function AppStack() {
@@ -41,6 +42,7 @@ export function AppStack() {
       <Screen name="CategoryServicesScreen" component={CategoryServicesScreen} />
       <Screen name="AllCategoriesScreen" component={AllCategoriesScreen} />
       <Screen name="UserServicesScreen" component={UserServicesScreen} />
+      <Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
     </Navigator>
   );
 }

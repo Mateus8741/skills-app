@@ -12,7 +12,7 @@ export function ProfileScreen({ navigation }: AppTabScreenProps<'ProfileScreen'>
     {
       icon: <User2 size={24} color="#374151" />,
       title: 'Informações pessoais',
-      onPress: () => console.log('Informações pessoais'),
+      onPress: () => navigation.navigate('PersonalInfoScreen'),
     },
     {
       icon: <MapPin size={24} color="#374151" />,
