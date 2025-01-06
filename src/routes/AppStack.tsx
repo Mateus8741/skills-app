@@ -9,6 +9,7 @@ import {
   AddressScreen,
   AllCategoriesScreen,
   CategoryServicesScreen,
+  ChangePasswordScreen,
   NewServiceScreen,
   PersonalInfoScreen,
   ServiceDetailsScreen,
@@ -29,6 +30,7 @@ export type AppStackParamList = {
   PersonalInfoScreen: undefined;
   AddressScreen: undefined;
   SettingsScreen: undefined;
+  ChangePasswordScreen: undefined;
 };
 
 export function AppStack() {
@@ -50,6 +52,7 @@ export function AppStack() {
       <Screen name="PersonalInfoScreen" component={PersonalInfoScreen} />
       <Screen name="AddressScreen" component={AddressScreen} />
       <Screen name="SettingsScreen" component={SettingsScreen} />
+      <Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
     </Navigator>
   );
 }
