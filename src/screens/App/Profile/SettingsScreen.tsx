@@ -10,11 +10,11 @@ export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>)
   const { removeUser } = useUserStorage();
   const { theme, setTheme } = useThemeStore();
 
-  const themeOptions: Array<{
+  const themeOptions: {
     icon: (color: string) => JSX.Element;
     title: string;
     value: ThemeType;
-  }> = [
+  }[] = [
     {
       icon: (color) => <Sun size={24} color={color} />,
       title: 'Tema claro',
@@ -65,7 +65,7 @@ export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>)
               } p-4 active:opacity-70`}
               onPress={() => setTheme(item.value)}>
               {item.icon(theme === item.value ? '#22C55E' : '#374151')}
-              <Text 
+              <Text
                 className={`text-base font-medium ${
                   theme === item.value ? 'text-green-600' : 'text-gray-700'
                 }`}>
