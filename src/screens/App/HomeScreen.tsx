@@ -1,5 +1,6 @@
 import { requestForegroundPermissionsAsync } from 'expo-location';
 import { PlusCircle } from 'lucide-react-native';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
