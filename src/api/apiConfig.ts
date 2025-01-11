@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosError } from 'axios';
 
-import { ChangePasswordScheema, LoginScheema, StepsScheema } from '~/schemas';
+import { ChangePasswordData, LoginScheema, StepsScheema } from '~/schemas';
 import { eventEmitter, EventTypes } from '~/utils/eventEmitter';
 
 // Constantes para storage
@@ -183,10 +183,15 @@ export async function login(data: LoginScheema) {
   return response;
 }
 
-export async function changePassword({ old_password, new_password }: ChangePasswordScheema) {
+export async function changePassword({
+  currentPassword,
+  new_Password,
+  confirm_Password,
+}: ChangePasswordData) {
   return await api.patch('/changePassword', {
-    old_password,
-    new_password,
+    currentPassword,
+    new_Password,
+    confirm_Password,
   });
 }
 
