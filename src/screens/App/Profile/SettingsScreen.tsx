@@ -4,11 +4,11 @@ import { Pressable, Text, View } from 'react-native';
 import { Box, Header } from '~/components';
 import { useUserStorage } from '~/contexts';
 import { AppScreenProps } from '~/routes';
-import { ThemeType, useThemeStore } from '~/stores/themeStore';
+import { ThemeType, useThemeStorage } from '~/stores';
 
 export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>) {
   const { removeUser } = useUserStorage();
-  const { theme, setTheme } = useThemeStore();
+  const { theme, setTheme } = useThemeStorage();
 
   const themeOptions: {
     icon: (color: string) => JSX.Element;
