@@ -6,7 +6,7 @@ export function useGetApplications() {
   return useQuery({
     queryKey: ['applications'],
     queryFn: async () => {
-      const response = await api.get('/applications');
+      const response = await api.get('/user/services');
       return response.data;
     },
     staleTime: 1000 * 60,
