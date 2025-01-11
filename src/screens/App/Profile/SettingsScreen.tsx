@@ -44,7 +44,7 @@ export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>)
     <Box>
       <Header title="Configurações" />
 
-      <View className="flex-1 gap-4 p-6">
+      <View className="flex-1 gap-4 p-6 dark:bg-gray-900">
         {settingsItems.map((item, index) => (
           <Pressable
             key={index}

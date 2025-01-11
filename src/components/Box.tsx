@@ -30,11 +30,12 @@ export function Box({
       <Container
         style={{
           flex: 1,
-          backgroundColor: 'white',
+          // backgroundColor: 'white',
           paddingHorizontal: 20,
           paddingTop: notpt ? 0 : top,
           paddingBottom: bottom,
         }}
+        className="bg-white dark:bg-gray-900"
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
