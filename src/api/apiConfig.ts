@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import Toast from 'react-native-toast-message';
 
 import { ChangePasswordData, LoginScheema, ServiceSchema, StepsScheema } from '~/schemas';
-import { getStoredTokens, storeTokens } from '~/services/auth';
+import { storeTokens } from '~/services/auth';
 
 type PromiseType = {
   resolve: (value?: unknown) => void;
@@ -25,6 +25,7 @@ type APIInstanceProps = AxiosInstance & {
 
 export const api = axios.create({
   baseURL: 'http://localhost:3100',
+  withCredentials: true,
 }) as APIInstanceProps;
 
 let isRefreshing = false;
@@ -47,14 +48,12 @@ api.registerInterceptTokenManager = ({ signOut, refreshTokenUpdated }) => {
     (response) => response,
     async (requestError) => {
       if (requestError?.response?.status === 401) {
-        const oldToken = await getStoredTokens();
+        const originalRequest = requestError.config;
 
-        if (!oldToken) {
+        if (originalRequest.url === '/refresh') {
           signOut();
           return Promise.reject(requestError);
         }
-
-        const originalRequest = requestError.config;
 
         if (isRefreshing) {
           return new Promise((resolve, reject) => {
@@ -73,10 +72,16 @@ api.registerInterceptTokenManager = ({ signOut, refreshTokenUpdated }) => {
 
         return new Promise(async (resolve, reject) => {
           try {
-            console.log('Refreshing token...');
-            const { data } = await api.post('/refresh', {
-              token: oldToken.accessToken,
-            });
+            console.log('Tentando refresh do token...');
+            const { data } = await api.post(
+              '/refresh',
+              {},
+              {
+                withCredentials: true,
+              }
+            );
+
+            console.log('Novo token recebido:', data.token);
 
             await storeTokens({ accessToken: data.token });
             api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
@@ -85,8 +90,9 @@ api.registerInterceptTokenManager = ({ signOut, refreshTokenUpdated }) => {
             refreshTokenUpdated(data.token);
             processQueue({ error: null, token: data.token });
 
-            resolve(originalRequest);
+            resolve(axios(originalRequest));
           } catch (error: any) {
+            console.error('Erro no refresh:', error);
             processQueue({ error, token: null });
             signOut();
 
@@ -115,8 +121,10 @@ api.registerInterceptTokenManager = ({ signOut, refreshTokenUpdated }) => {
 export function setAuthToken(token: string) {
   if (token) {
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    console.log('Token set:', token);
   } else {
     delete api.defaults.headers.common['Authorization'];
+    console.log('Token removed');
   }
 }
 

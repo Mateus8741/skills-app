@@ -9,6 +9,5 @@ export function useGetApplications() {
       const response = await api.get('/user/services');
       return response.data;
     },
-    staleTime: 1000 * 60,
   });
 }
