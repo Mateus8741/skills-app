@@ -13,9 +13,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { AuthListener } from '~/api';
 
+import { api, setAuthToken } from '~/api/apiConfig';
 import { Loading } from '~/components';
+import { useUserStorage } from '~/contexts';
 import { Routes } from '~/routes';
 import { useThemeChanger } from '~/services';
+import { removeTokens } from '~/services/auth';
 import { useThemeStorage } from '~/stores';
 
 const queryClient = new QueryClient();
@@ -29,12 +32,25 @@ export default function App() {
 
   const { theme } = useThemeStorage();
   const { setColorScheme } = useThemeChanger();
+  const { removeUser } = useUserStorage();
 
   useEffect(() => {
     if (theme) {
       setColorScheme(theme);
     }
   }, [theme]);
+
+  useEffect(() => {
+    api.registerInterceptTokenManager({
+      signOut: () => {
+        removeUser();
+        removeTokens();
+      },
+      refreshTokenUpdated: (token) => {
+        setAuthToken(token);
+      },
+    });
+  }, [removeUser]);
 
   return (
     <SafeAreaProvider>
