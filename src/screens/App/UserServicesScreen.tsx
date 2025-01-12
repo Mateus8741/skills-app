@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, Text } from 'react-native';
 
 import { useGetApplications } from '~/api';
-import { Box, ServiceCard } from '~/components';
+import { Box, Header, Loading, ServiceCard } from '~/components';
 import { ServiceCardProps } from '~/models';
 import { AppScreenProps } from '~/routes';
 
@@ -14,16 +14,17 @@ export function UserServicesScreen({ navigation }: AppScreenProps<'UserServicesS
   }
 
   if (isLoading) {
-    return <Text>Carregando...</Text>;
+    return <Loading />;
   }
-
-  console.log('applications:', applications);
 
   return (
     <Box>
+      <Header title="Meus serviços" />
+
       <FlatList
         data={applications}
         keyExtractor={(item) => item.id}
+        className="px-2"
         renderItem={({ item }) => (
           <ServiceCard service={item} onPress={() => handleServicePress(item)} />
         )}

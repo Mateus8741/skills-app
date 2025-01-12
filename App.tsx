@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
+import { AuthListener } from '~/api';
 
 import { Loading } from '~/components';
 import { Routes } from '~/routes';
@@ -39,6 +40,7 @@ export default function App() {
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <QueryClientProvider client={queryClient}>
+          <AuthListener />
           {fontsLoaded ? <Routes /> : <Loading />}
           <Toast />
         </QueryClientProvider>
