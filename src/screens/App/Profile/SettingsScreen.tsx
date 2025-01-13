@@ -17,6 +17,8 @@ export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>)
   });
   const { theme, setTheme } = useThemeStorage();
 
+  console.log(theme);
+
   const handleExcludeAccount = (password: string) => {
     exclude(password);
   };

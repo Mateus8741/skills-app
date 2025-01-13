@@ -11,8 +11,8 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { AuthListener } from '~/api';
 
+import { AuthListener } from '~/api';
 import { api, setAuthToken } from '~/api/apiConfig';
 import { Loading } from '~/components';
 import { useUserStorage } from '~/contexts';
@@ -24,15 +24,15 @@ import { useThemeStorage } from '~/stores';
 const queryClient = new QueryClient();
 
 export default function App() {
+  const { theme } = useThemeStorage();
+  const { setColorScheme } = useThemeChanger();
+  const { removeUser } = useUserStorage();
+
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
     Roboto_500Medium,
     Roboto_700Bold,
   });
-
-  const { theme } = useThemeStorage();
-  const { setColorScheme } = useThemeChanger();
-  const { removeUser } = useUserStorage();
 
   useEffect(() => {
     if (theme) {
