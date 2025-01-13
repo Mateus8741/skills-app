@@ -15,6 +15,7 @@ export * from './InfoTerms';
 export * from './InfoText';
 export * from './Loading';
 export * from './LocationDetails';
+export * from './Modals/DeleteAccountModal';
 export * from './MostSearch';
 export * from './PasswordInput';
 export * from './Select';
