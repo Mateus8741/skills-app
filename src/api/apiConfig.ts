@@ -159,3 +159,7 @@ export async function createService(data: ServiceSchema) {
 export async function getServices() {
   return await api.get('/service');
 }
+
+export async function deleteAccount(password: string) {
+  return await api.delete('/users/account', { data: { password } });
+}
