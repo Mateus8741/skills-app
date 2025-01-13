@@ -21,3 +21,4 @@ export * from './PasswordInput';
 export * from './Select';
 export * from './ServiceCard';
 export * from './TextInput';
+export * from './ThemeOptions';

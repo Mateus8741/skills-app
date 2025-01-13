@@ -1,12 +1,12 @@
-import { Lock, Moon, Smartphone, Sun, Trash } from 'lucide-react-native';
+import { Lock, Trash } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 import { useDeleteAccount } from '~/api';
-import { Box, DeleteAccountModal, Header } from '~/components';
+import { Box, DeleteAccountModal, Header, themeOptions } from '~/components';
 import { useUserStorage } from '~/contexts';
 import { AppScreenProps } from '~/routes';
-import { ThemeType, useThemeStorage } from '~/stores';
+import { useThemeStorage } from '~/stores';
 
 export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -17,33 +17,9 @@ export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>)
   });
   const { theme, setTheme } = useThemeStorage();
 
-  console.log(theme);
-
   const handleExcludeAccount = (password: string) => {
     exclude(password);
   };
-
-  const themeOptions: {
-    icon: (color: string) => JSX.Element;
-    title: string;
-    value: ThemeType;
-  }[] = [
-    {
-      icon: (color) => <Sun size={24} color={color} />,
-      title: 'Tema claro',
-      value: 'light',
-    },
-    {
-      icon: (color) => <Moon size={24} color={color} />,
-      title: 'Tema escuro',
-      value: 'dark',
-    },
-    {
-      icon: (color) => <Smartphone size={24} color={color} />,
-      title: 'Tema do sistema',
-      value: 'system',
-    },
-  ];
 
   const settingsItems = [
     {
