@@ -96,7 +96,7 @@ export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>)
           </Pressable>
         ))}
 
-        {/* <View className="gap-2">
+        <View className="gap-2">
           <Text className="text-base font-medium text-gray-700">Tema</Text>
           {themeOptions.map((item, index) => (
             <Pressable
@@ -114,7 +114,7 @@ export function SettingsScreen({ navigation }: AppScreenProps<'SettingsScreen'>)
               </Text>
             </Pressable>
           ))}
-        </View> */}
+        </View>
       </View>
 
       <Pressable
