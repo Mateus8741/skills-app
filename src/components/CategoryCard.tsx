@@ -7,6 +7,8 @@ interface CategoryCardProps extends PressableProps {
 }
 
 export function CategoryCard({ name, image, servicesCount, ...rest }: CategoryCardProps) {
+  const servicesText = servicesCount ? `${servicesCount} serviços` : '0 serviços';
+
   return (
     <View className="flex-1 items-center">
       <Pressable className="w-40 rounded-2xl bg-white shadow-sm active:opacity-70" {...rest}>
@@ -24,7 +26,7 @@ export function CategoryCard({ name, image, servicesCount, ...rest }: CategoryCa
             <View className="mt-2 flex-row items-center justify-center gap-2">
               <View className="h-2 w-2 rounded-full bg-green-500" />
               <Text className="text-sm text-gray-600">
-                {servicesCount || Math.floor(Math.random() * 100) + 50} serviços
+                {servicesText}
               </Text>
             </View>
           </View>
